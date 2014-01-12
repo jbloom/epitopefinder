@@ -1,0 +1,9 @@
+# input file for epitopefinder_plotdistributioncomparison.py
+plotfile distributioncomparison_human_H3N2_all_vs_substituted.pdf
+epitopesfile1 epitopesbysite_human_H3N2.csv
+epitopesfile2 epitopecounts_substitutedsites_human_H3N2.csv
+set1name all
+set2name substituted
+pvalue 100000
+pvaluewithreplacement False
+title human H3N2 influenza NP

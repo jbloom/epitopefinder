@@ -1,0 +1,5 @@
+# input file for epitopefinder_selectsites.py
+epitopesbysitefile epitopesbysite_human_H3N2.csv
+selectsitesfile epitopecounts_epistaticsites_human_H3N2.csv
+sites 259 259 384 280
+retainmultiple False
