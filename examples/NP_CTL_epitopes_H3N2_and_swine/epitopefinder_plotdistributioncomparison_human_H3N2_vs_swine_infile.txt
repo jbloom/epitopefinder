@@ -1,8 +1,0 @@
-# input file for epitopefinder_plotdistributioncomparison.py
-plotfile distributioncomparison_human_H3N2_vs_swine.pdf
-epitopesfile1 epitopesbysite_human_H3N2.csv
-epitopesfile2 epitopesbysite_swine.csv
-set1name human H3N2
-set2name swine
-pvalue None
-title None

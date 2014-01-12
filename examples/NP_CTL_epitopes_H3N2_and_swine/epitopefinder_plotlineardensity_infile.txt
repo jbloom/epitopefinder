@@ -1,6 +1,0 @@
-# input file for epitopefinder_plotlineardensity.py
-plotfile epitopelineardensity.pdf
-title False
-fixymax False
-epitopesbysite_human_H3N2.csv human H3N2
-epitopesbysite_swine.csv swine

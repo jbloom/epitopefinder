@@ -1,0 +1,587 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>epitope_mapper.sequtils Module &mdash; epitopefinder 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="epitopefinder 0.1 documentation" href="index.html" />
+    <link rel="up" title="Python modules" href="pythonapi.html" />
+    <link rel="next" title="epitopefinder.align Module" href="align_module.html" />
+    <link rel="prev" title="epitopefinder.io Module" href="io_module.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="align_module.html" title="epitopefinder.align Module"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="io_module.html" title="epitopefinder.io Module"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">epitopefinder 0.1 documentation</a> &raquo;</li>
+          <li><a href="pythonapi.html" accesskey="U">Python modules</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-sequtils">
+<span id="epitope-mapper-sequtils-module"></span><h1><tt class="docutils literal"><span class="pre">epitope_mapper.sequtils</span></tt> Module<a class="headerlink" href="#module-sequtils" title="Permalink to this headline">¶</a></h1>
+<p>This file contains utilities for manipulating sequences.</p>
+<p>Performs functions such as reading / writing FASTA files, 
+translating sequences, etc.</p>
+<p>Written by Jesse Bloom.</p>
+<dl class="function">
+<dt id="sequtils.AAThreeToOne">
+<tt class="descclassname">sequtils.</tt><tt class="descname">AAThreeToOne</tt><big>(</big><em>aathree</em><big>)</big><a class="headerlink" href="#sequtils.AAThreeToOne" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts a three letter amino acid code into a one letter code.</p>
+<p>The single input argument is the three letter amino acid code.  It
+can be of any case.</p>
+<p>This function returns, in upper case, the one letter amino acid code.
+It raises an exception if <em>aathree</em> is not a valid one letter code.
+&#8216;Xaa&#8217; is converted to &#8216;X&#8217;.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">AAThreeToOne</span><span class="p">(</span><span class="s">&#39;Ala&#39;</span><span class="p">)</span>
+<span class="go">&#39;A&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">AAThreeToOne</span><span class="p">(</span><span class="s">&#39;cys&#39;</span><span class="p">)</span>
+<span class="go">&#39;C&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">AAThreeToOne</span><span class="p">(</span><span class="s">&#39;Xaa&#39;</span><span class="p">)</span>
+<span class="go">&#39;X&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">AAThreeToOne</span><span class="p">(</span><span class="s">&#39;hi&#39;</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+   <span class="c">...</span>
+<span class="gr">ValueError</span>: <span class="n">Invalid amino acid code of hi.</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="sequtils.AmbiguousNTCodes">
+<tt class="descclassname">sequtils.</tt><tt class="descname">AmbiguousNTCodes</tt><big>(</big><em>nt</em><big>)</big><a class="headerlink" href="#sequtils.AmbiguousNTCodes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns all possible nucleotides corresponding to an ambiguous code.</p>
+<p>This method takes as input a single nucleotide character <em>nt</em>, which is
+assumed to represent a nucleotide as one of the accepted
+codes for an ambiguous character.  Returns a list giving
+all possible codes for which a nucleotide might stand.  Raises
+an exception if <em>nt</em> is not a valid nucleotide code.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">AmbiguousNTCodes</span><span class="p">(</span><span class="s">&#39;N&#39;</span><span class="p">)</span>
+<span class="go">[&#39;A&#39;, &#39;T&#39;, &#39;G&#39;, &#39;C&#39;]</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">AmbiguousNTCodes</span><span class="p">(</span><span class="s">&#39;R&#39;</span><span class="p">)</span>
+<span class="go">[&#39;A&#39;, &#39;G&#39;]</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">AmbiguousNTCodes</span><span class="p">(</span><span class="s">&#39;A&#39;</span><span class="p">)</span>
+<span class="go">[&#39;A&#39;]</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">AmbiguousNTCodes</span><span class="p">(</span><span class="s">&#39;-&#39;</span><span class="p">)</span>
+<span class="go">[&#39;-&#39;]</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">AmbiguousNTCodes</span><span class="p">(</span><span class="s">&#39;F&#39;</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+   <span class="c">...</span>
+<span class="gr">ValueError</span>: <span class="n">Invalid nt code of &quot;F&quot;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="sequtils.ClassifyBySeason">
+<tt class="descclassname">sequtils.</tt><tt class="descname">ClassifyBySeason</tt><big>(</big><em>genomes</em>, <em>startyear</em>, <em>endyear</em>, <em>subsample</em>, <em>season</em><big>)</big><a class="headerlink" href="#sequtils.ClassifyBySeason" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="sequtils.CondenseSeqs">
+<tt class="descclassname">sequtils.</tt><tt class="descname">CondenseSeqs</tt><big>(</big><em>seqs</em>, <em>maxdiffs</em>, <em>exclude_positions</em><big>)</big><a class="headerlink" href="#sequtils.CondenseSeqs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes nearly identical protein sequences.</p>
+<p><em>seqs</em> is a list of sequences as (head, seq) 2-tuples.  The sequences
+are assumed to be aligned.</p>
+<p><em>maxdiffs</em> specifies the maximum number of differences that a sequence
+can have from another sequence in order to be removed.</p>
+<p><em>exclude_positions</em> is a list of integers specifying positions at which
+sequence can NOT differ and still be removed.  These integers
+are for numbering the sequences as 1, 2, ...</p>
+<p>The method proceeds as follows:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>For the first sequence iterates through the rest of the sequences,
+and removes any that differ at &lt;= ndiff sites, and do not differ
+at the sites specified by &#8216;exclude_position&#8217;.</li>
+<li>Repeats this process for each of the remaining sequences.</li>
+</ol>
+</div></blockquote>
+<p>The returned variable is <em>seqs</em> with the removed sequences gone.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">seqs</span> <span class="o">=</span> <span class="p">[(</span><span class="s">&#39;s1&#39;</span><span class="p">,</span> <span class="s">&#39;ATGC&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s">&#39;s2&#39;</span><span class="p">,</span> <span class="s">&#39;ATGA&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s">&#39;s3&#39;</span><span class="p">,</span> <span class="s">&#39;ATC-&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s">&#39;s4&#39;</span><span class="p">,</span> <span class="s">&#39;ATGC&#39;</span><span class="p">)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CondenseSeqs</span><span class="p">(</span><span class="n">seqs</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">[])</span>
+<span class="go">[(&#39;s1&#39;, &#39;ATGC&#39;), (&#39;s2&#39;, &#39;ATGA&#39;), (&#39;s3&#39;, &#39;ATC-&#39;)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CondenseSeqs</span><span class="p">(</span><span class="n">seqs</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">[])</span>
+<span class="go">[(&#39;s1&#39;, &#39;ATGC&#39;), (&#39;s3&#39;, &#39;ATC-&#39;)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CondenseSeqs</span><span class="p">(</span><span class="n">seqs</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">[</span><span class="mi">4</span><span class="p">])</span>
+<span class="go">[(&#39;s1&#39;, &#39;ATGC&#39;), (&#39;s2&#39;, &#39;ATGA&#39;), (&#39;s3&#39;, &#39;ATC-&#39;)]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="sequtils.DateToOrdinal">
+<tt class="descclassname">sequtils.</tt><tt class="descname">DateToOrdinal</tt><big>(</big><em>datestring</em>, <em>refyear</em><big>)</big><a class="headerlink" href="#sequtils.DateToOrdinal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts a date string to an ordinal date.</p>
+<p><em>datestring</em> is a date given by a string such as &#8216;2007/2/13&#8217; (for
+Feb-13-2007), or &#8216;2007/2//&#8217; if no day is specified, or
+&#8216;2007//&#8217; if no day or month is specified. The &#8216;/&#8217; characters can
+also be &#8216;-&#8216;.</p>
+<p><em>refdate</em> is an integer year from the approximate timeframe we are examining
+which is used to anchor the datestring date on the assumption
+that each year has 365.25 days.</p>
+<p>The returned value is a number (decimal) giving the date. If no
+day is specified, the 15th (halfway through the month) is chosen.
+If no month or day is specified, July 1 (halfway through the
+year) is chosen.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="s">&quot;</span><span class="si">%.2f</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">DateToOrdinal</span><span class="p">(</span><span class="s">&#39;2007/4/27&#39;</span><span class="p">,</span> <span class="mi">1968</span><span class="p">)</span>
+<span class="go">2007.32</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="s">&quot;</span><span class="si">%.2f</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">DateToOrdinal</span><span class="p">(</span><span class="s">&#39;2007/4/&#39;</span><span class="p">,</span> <span class="mi">1968</span><span class="p">)</span>
+<span class="go">2007.29</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="s">&quot;</span><span class="si">%.2f</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">DateToOrdinal</span><span class="p">(</span><span class="s">&#39;2007//&#39;</span><span class="p">,</span> <span class="mi">1968</span><span class="p">)</span>
+<span class="go">2007.50</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="s">&quot;</span><span class="si">%.2f</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">DateToOrdinal</span><span class="p">(</span><span class="s">&#39;2007-4-27&#39;</span><span class="p">,</span> <span class="mi">1968</span><span class="p">)</span>
+<span class="go">2007.32</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="sequtils.FindMotifs">
+<tt class="descclassname">sequtils.</tt><tt class="descname">FindMotifs</tt><big>(</big><em>seq</em>, <em>motif</em><big>)</big><a class="headerlink" href="#sequtils.FindMotifs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finds occurrences of a specific motif in a nucleotide sequence.</p>
+<p><em>seq</em> is a string giving a nucleotide sequence.</p>
+<p><em>motif</em> is a string giving the motif that we are looking for.  It should
+be a string of valid nucleotide characters:
+* A   Adenine
+* G   Guanine
+* C   Cytosine
+* T   Thymine
+* U   Uracil
+* R   Purine (A or G)
+* Y   Pyrimidine (C or T)
+* N   Any nucleotide
+* W   Weak (A or T)
+* S   Strong (G or C)
+* M   Amino (A or C)
+* K   Keto (G or T)
+* B   Not A (G or C or T)
+* H   Not G (A or C or T)
+* D   Not C (A or G or T)
+* V   Not T (A or G or C)</p>
+<p>The returned variable is a list <em>motif_indices</em> of the indices that
+each occurrence of <em>motif</em> in <em>seq</em> begins with.  For example,
+if there is a motif beginning at <em>seq[7]</em>, then 7 will be
+present in <em>motif_indices</em>.  So the number of occurrences of
+the motif will be equal to len(<em>motif_indices</em>).</p>
+<p>This function is not case sensitive, so nucleotides can be either upper
+or lower case.  In addition, T (thymine) and U (uracil) nucleotides
+are treated identically, so the function can handle either DNA
+or RNA sequences.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">FindMotifs</span><span class="p">(</span><span class="s">&#39;ATCGAA&#39;</span><span class="p">,</span> <span class="s">&#39;WCGW&#39;</span><span class="p">)</span>
+<span class="go">[1]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="sequtils.GetEntries">
+<tt class="descclassname">sequtils.</tt><tt class="descname">GetEntries</tt><big>(</big><em>namelist</em>, <em>fastafile</em>, <em>allow_substring=False</em><big>)</big><a class="headerlink" href="#sequtils.GetEntries" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets selected entries from a (potentially very large) FASTA file.</p>
+<p>This method is designed to extract sequences from a FASTA file.  It will work
+even if the FASTA file is very large, since it avoids reading the entire
+file into memory at once.</p>
+<p><em>namelist</em> specifies the &#8220;names&#8221; of the sequences that we want to extract from
+the FASTA file.  The &#8220;name&#8221; of a sequence is the string immediately following
+the &#8220;&gt;&#8221; in the FASTA file header for a sequence, terminated by a space character
+(space, tab, or return).  So for example, the header:</p>
+<div class="highlight-python"><pre>&gt;E_coli_thioredoxin: the thioredoxin protein from E. coli</pre>
+</div>
+<p>would correspond to a name of &#8220;E_coli_thioredoxin&#8221;.  &#8216;namelist&#8217; specifies
+a list of these names.</p>
+<p><em>fastafile</em> is the name of a FASTA file that contains the sequences we are searching
+for.  For this method to be guaranteed to work properly, each sequence in the FASTA
+file must contain a unique name, where a &#8220;name&#8221; is as defined above.  Note that this
+uniqueness of names is not rigorously checked for, so if there are not unique names,
+the function may raise an exception, or it may continue along and give no hint of
+the problem.</p>
+<p><em>allow_substring</em> is an optional Boolean switch that specifies that the name given in
+<em>namelist</em> need only be a substring of the first entry in the <em>fastafile</em> header.</p>
+<p>The function expects to find exactly one entry in <em>fastafile</em> for each name listed in
+<em>namelist</em>.  If it does not, it will raise an exception.  The returned variable
+is a list composed of 2-tuples.  Element i of this list corresponds to the name
+given by <em>namelist[i]</em>.  Each 2-tuple has the form &#8216;(header, sequence)&#8217; where
+&#8216;header&#8217; is the full FASTA header, but with the leading &#8220;&gt;&#8221; character and any trailing
+linebreaks/spaces removed.  &#8216;sequence&#8217; is a string giving the sequence, again with the
+trailing linebreak removed.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="sequtils.GetSequence">
+<tt class="descclassname">sequtils.</tt><tt class="descname">GetSequence</tt><big>(</big><em>header</em>, <em>headers_sequences</em><big>)</big><a class="headerlink" href="#sequtils.GetSequence" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets a particular sequence based on its header name.</p>
+<p><em>header</em> specifies the name of a sequence&#8217;s FASTA header.</p>
+<p><em>headers_sequences</em> is a list of tuples &#8216;(head, seq)&#8217; as would
+be returned by <strong>Read</strong>.</p>
+<p>This function searches through <em>headers_sequences</em> and returns the
+sequence corresponding to the first header found that matches
+the calling argument <em>header</em>.  If no such header is found,
+raises an exception.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="sequtils.ParseInfluenzaGenomes">
+<tt class="descclassname">sequtils.</tt><tt class="descname">ParseInfluenzaGenomes</tt><big>(</big><em>infile</em>, <em>genes</em><big>)</big><a class="headerlink" href="#sequtils.ParseInfluenzaGenomes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parses influenza genomes from FASTA file.</p>
+<p>This function is designed to read a FASTA file that contains
+each of the proteins or genes for an influenza genome, and
+then return all strains with full genomes.</p>
+<p>CALLING VARIABLES:</p>
+<ul>
+<li><p class="first"><em>infile</em> is a string giving the name of the FASTA file. The
+headers should be of the following format:</p>
+<div class="highlight-python"><pre>&gt;AAX11456 A/New York/61A/2003(H3N2) 2003/12/20 M1
+
+&gt;AAB06984 A/Louisiana/4/93(H3N2) 1993// NA
+
+&gt;CAD29965 A/Panama/2007/1999 1999// NA</pre>
+</div>
+<p>These headers given the sequence number, the strain name (it
+is optional whether the subtype, see the third example header),
+the year/month/date of isolation, and the gene.</p>
+</li>
+<li><p class="first"><em>genes</em> is a list of all required gene segments, as listed
+in the header. For example, you might commonly have
+<em>genes = [&#8216;PB2&#8217;, &#8216;PB1&#8217;, &#8216;PA&#8217;, &#8216;HA&#8217;, &#8216;NP&#8217;, &#8216;NA&#8217;, &#8216;M1&#8217;, &#8216;M2&#8217;, &#8216;NS1&#8217;, &#8216;NS2&#8217;]</em>.</p>
+</li>
+</ul>
+<p>RETURN VARIABLE</p>
+<p>This function returns the dictionary <em>genomes</em>. This dictionary is keyed
+by the 4-tuples <em>(strain, year, month, day)</em>. If no month is specified
+then <em>month</em> is <em>None</em>, otherwise it is the numeric month. Likewise for 
+<em>day</em>. So the keys for the examples above would be:</p>
+<blockquote>
+<div><ul class="simple">
+<li><em>(&#8216;A/New York/61A/2003(H3N2)&#8217;, 2003, 12, 20)</em></li>
+<li><em>(&#8216;A/Louisiana/4/93(H3N2)&#8217;, 1993, None, None)</em></li>
+<li><em>(&#8216;A/Panama/2007/1999&#8217;, 1999, None, None)</em></li>
+</ul>
+</div></blockquote>
+<p>The value for each key is another dictionary. It is keyed by each
+string <em>gene</em> in <em>genes</em>, and the values are the sequences for those
+genes. The sequences are all in upper case.</p>
+<p><em>genomes</em> only contains those strains for which each <em>gene</em> in <em>genes</em>
+has a sequence specified. If there are multiple sequences provided for
+a gene, takes the first one encountered. If there are multiple full genome
+entries for the same strain name with some providing more detailed month/day
+information, takes the one with more detailed month/day information.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="sequtils.PurgeAmbiguousDNA">
+<tt class="descclassname">sequtils.</tt><tt class="descname">PurgeAmbiguousDNA</tt><big>(</big><em>headers_sequences</em><big>)</big><a class="headerlink" href="#sequtils.PurgeAmbiguousDNA" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes all sequences with ambiguous positions from nucleotide sequences.</p>
+<p>This function takes a single calling argument <em>headers_sequences</em>, which
+is a list of tuples <em>(header, seq)</em> as would be returned by <cite>Read</cite>.
+These sequences should specify nucleotide sequences.  It returns
+a new list which is a copy of <em>headers_sequences</em>, except that all
+sequences that contain ambiguous nucleotide entries (i.e. characters
+that are &#8216;A&#8217;, &#8216;T&#8217;, &#8216;C&#8217;, &#8216;G&#8217;, &#8216;a&#8217;, &#8216;t&#8217;, &#8216;c&#8217;, or &#8216;g&#8217;) have been
+removed.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="sequtils.PurgeDuplicates">
+<tt class="descclassname">sequtils.</tt><tt class="descname">PurgeDuplicates</tt><big>(</big><em>headers_sequences</em><big>)</big><a class="headerlink" href="#sequtils.PurgeDuplicates" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes all duplicate sequences and those that are substrings.</p>
+<p>This function takes a single calling argument <em>headers_sequences</em>, which
+is a list of tuples <em>(header, seq)</em> as would be returned by <cite>Read</cite>.
+It returns a new list in which each sequence appears exactly once.
+If a sequence appears more than once in the original calling
+list, the sequence that is kept is the first one encountered in
+the list. Sequences that are substrings of others
+are also removed.</p>
+<p>The ordering of sequences is preserved except for the removal
+of duplicates.  Sequences are returned as all upper case.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">PurgeDuplicates</span><span class="p">([(</span><span class="s">&#39;seq1&#39;</span><span class="p">,</span> <span class="s">&#39;atgc&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s">&#39;seq2&#39;</span><span class="p">,</span> <span class="s">&#39;GGCA&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s">&#39;seq3&#39;</span><span class="p">,</span> <span class="s">&#39;ATGC&#39;</span><span class="p">)])</span>
+<span class="go">[(&#39;seq1&#39;, &#39;ATGC&#39;), (&#39;seq2&#39;, &#39;GGCA&#39;)]</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">PurgeDuplicates</span><span class="p">([(</span><span class="s">&#39;seq1&#39;</span><span class="p">,</span> <span class="s">&#39;atgcca&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s">&#39;seq2&#39;</span><span class="p">,</span> <span class="s">&#39;TGCC&#39;</span><span class="p">)])</span>
+<span class="go">[(&#39;seq1&#39;, &#39;ATGCCA&#39;)]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="sequtils.Read">
+<tt class="descclassname">sequtils.</tt><tt class="descname">Read</tt><big>(</big><em>fastafile</em><big>)</big><a class="headerlink" href="#sequtils.Read" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads sequences from a FASTA file.</p>
+<p><em>fastafile</em> should specify the name of a FASTA file.</p>
+<p>This function reads all sequences from the FASTA file.  It returns the
+list <em>headers_seqs</em>.  This list is composed of a 2-tuple &#8216;(header, seq)&#8217;
+for every sequence entry in FASTA file.  &#8216;header&#8217; is the header for
+a sequence, with the leading &#8220;&gt;&#8221; and any trailing spaces removed. &#8216;seq&#8217;
+is the corresponding sequence.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="sequtils.ReverseComplement">
+<tt class="descclassname">sequtils.</tt><tt class="descname">ReverseComplement</tt><big>(</big><em>heads_seqs</em><big>)</big><a class="headerlink" href="#sequtils.ReverseComplement" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts nucleotide sequences to their reverse complements.</p>
+<p>The single input argument <em>heads_seqs</em> is a list of sequences
+in the format of tuples <em>(head, seq)</em> where <em>head</em> is the
+header and <em>seq</em> is the sequence.  The sequences should all
+be nucleotide sequences composed exclusively of A, T, C, or G
+(or their lowercase equivalents).  Ambiguous nucleotide codes
+are currently not accepted.</p>
+<p>The returned variable is a copy of <em>heads_seqs</em> in which the headers
+are unchanged but the sequences are converted to reverse complements.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">ReverseComplement</span><span class="p">([(</span><span class="s">&#39;seq1&#39;</span><span class="p">,</span> <span class="s">&#39;ATGCAA&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s">&#39;seq2&#39;</span><span class="p">,</span> <span class="s">&#39;atgGCA&#39;</span><span class="p">)])</span>
+<span class="go">[(&#39;seq1&#39;, &#39;TTGCAT&#39;), (&#39;seq2&#39;, &#39;TGCcat&#39;)]</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">ReverseComplement</span><span class="p">([(</span><span class="s">&#39;seq1&#39;</span><span class="p">,</span> <span class="s">&#39;ATGNAA&#39;</span><span class="p">)])</span>
+<span class="gt">Traceback (most recent call last):</span>
+    <span class="o">...</span>
+<span class="gr">ValueError</span>: <span class="n">Invalid nucleotide code.</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="sequtils.Translate">
+<tt class="descclassname">sequtils.</tt><tt class="descname">Translate</tt><big>(</big><em>headers_sequences</em>, <em>readthrough_n=False</em>, <em>readthrough_stop=False</em>, <em>truncate_incomplete=False</em>, <em>translate_gaps=False</em><big>)</big><a class="headerlink" href="#sequtils.Translate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Translates a set of nucleotide sequences to amino acid sequences.</p>
+<p>This function takes as input a single calling argument <em>header_sequences</em>,
+which is a list of tuples <em>(header, seq)</em> as would be returned by
+<cite>Read</cite>.  The sequences should all specify valid coding nucleotide
+sequences.  The returned variable is a new list in which
+all of the nucleotide sequences have been translated to their
+corresponding protein sequences, given by one letter codes. Stop codons
+are translated to &#8216;*&#8217;.
+If any of the nucleotide sequences do not translate to
+valid protein sequences, an exception is raised.</p>
+<p>The optional argument <em>readthrough_n</em> specifies that if any nucleotides
+in the sequence are equal to to an ambiguous nt code and cannot therefore
+be unambiguously translated into an amino acid, we simply translate through these 
+nucleotides by making the corresponding amino acid equal to &#8220;X&#8221;.  By
+default, this option is <em>False</em>.  Note that even when this option is <em>False</em>,
+certain ambiguous nucleotides may still be translatable if they all lead to 
+the same amino acid.</p>
+<p>The optional argument <em>readthrough_stop</em> specifies that if we encounter
+any stop codons, we simply translation them to &#8216;*&#8217;.  By default,
+this option is <em>False</em>, meaning that we instead raise an error
+of an incomplete stop codon.</p>
+<p>The optional argument <em>truncate_incomplete</em> specifies that if the sequence
+length is not a multiple of three, we simply truncate off the one or two
+final nucleotides to make the length a multiple of three prior to translation.
+By default, this option is <em>False</em>, meaning that no such truncation is done.</p>
+<p>The optional argument <em>translate_gaps</em> specifies that a codon containing &#8216;-&#8216; 
+is translated to &#8216;-&#8216;.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">Translate</span><span class="p">([(</span><span class="s">&#39;seq1&#39;</span><span class="p">,</span> <span class="s">&#39;ATGTAA&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s">&#39;seq2&#39;</span><span class="p">,</span> <span class="s">&#39;gggtgc&#39;</span><span class="p">)])</span>
+<span class="go">[(&#39;seq1&#39;, &#39;M*&#39;), (&#39;seq2&#39;, &#39;GC&#39;)]</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">Translate</span><span class="p">([(</span><span class="s">&#39;seq2&#39;</span><span class="p">,</span> <span class="s">&#39;GGNTGC&#39;</span><span class="p">)])</span>
+<span class="go">[(&#39;seq2&#39;, &#39;GC&#39;)]</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">Translate</span><span class="p">([(</span><span class="s">&#39;seq2&#39;</span><span class="p">,</span> <span class="s">&#39;NGGTGC&#39;</span><span class="p">)])</span>
+<span class="gt">Traceback (most recent call last):</span>
+   <span class="c">...</span>
+<span class="gr">ValueError</span>: <span class="n">Cannot translate codon NGG</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">Translate</span><span class="p">([(</span><span class="s">&#39;seq2&#39;</span><span class="p">,</span> <span class="s">&#39;NGGTGC&#39;</span><span class="p">)],</span> <span class="n">readthrough_n</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="go">[(&#39;seq2&#39;, &#39;XC&#39;)]</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">Translate</span><span class="p">([(</span><span class="s">&#39;seq2&#39;</span><span class="p">,</span> <span class="s">&#39;TAATGC&#39;</span><span class="p">)])</span>
+<span class="gt">Traceback (most recent call last):</span>
+   <span class="c">...</span>
+<span class="gr">ValueError</span>: <span class="n">Premature stop codon</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">Translate</span><span class="p">([(</span><span class="s">&#39;seq2&#39;</span><span class="p">,</span> <span class="s">&#39;TAATGC&#39;</span><span class="p">)],</span> <span class="n">readthrough_stop</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="go">[(&#39;seq2&#39;, &#39;*C&#39;)]</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">Translate</span><span class="p">([(</span><span class="s">&#39;seq2&#39;</span><span class="p">,</span> <span class="s">&#39;TGCA&#39;</span><span class="p">)])</span>
+<span class="gt">Traceback (most recent call last):</span>
+   <span class="c">...</span>
+<span class="gr">ValueError</span>: <span class="n">Sequence length is not a multiple of three</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">Translate</span><span class="p">([(</span><span class="s">&#39;seq2&#39;</span><span class="p">,</span> <span class="s">&#39;TGCA&#39;</span><span class="p">)],</span> <span class="n">truncate_incomplete</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="go">[(&#39;seq2&#39;, &#39;C&#39;)]</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">Translate</span><span class="p">([(</span><span class="s">&#39;seq2&#39;</span><span class="p">,</span> <span class="s">&#39;TGC---&#39;</span><span class="p">)])</span>
+<span class="gt">Traceback (most recent call last):</span>
+   <span class="c">...</span>
+<span class="gr">ValueError</span>: <span class="n">Cannot translate gap.</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">Translate</span><span class="p">([(</span><span class="s">&#39;seq2&#39;</span><span class="p">,</span> <span class="s">&#39;TGC---&#39;</span><span class="p">)],</span> <span class="n">translate_gaps</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="go">[(&#39;seq2&#39;, &#39;C-&#39;)]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="sequtils.UnknownsToGaps">
+<tt class="descclassname">sequtils.</tt><tt class="descname">UnknownsToGaps</tt><big>(</big><em>headers_sequences</em><big>)</big><a class="headerlink" href="#sequtils.UnknownsToGaps" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts all unknown ambiguous amino acids to gap characters.</p>
+<p>This function converts all of the common codes for unknown amino acids
+to gaps.  That is, &#8220;B&#8221; (Asp or Asn), &#8220;Z&#8221; (Glu or Gln), and &#8220;X&#8221; (any
+amino acid) are all converted to the character &#8220;-&#8221;, which is usually
+taken to denote a gap.  You would use this method if you are 
+subsequently processing the sequences with a program that recognizes
+the gap character but not these three other unknown characters.  Note,
+of course, that you are changing your sequence, so don&#8217;t do this unless
+you need to.</p>
+<p>This method takes as a single calling variable the list <em>header_sequences</em>
+as would be returned by <cite>Read</cite>.  It returns a copy of this list, but
+with all unknown amino acids replaced by &#8220;-&#8221;.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="sequtils.Write">
+<tt class="descclassname">sequtils.</tt><tt class="descname">Write</tt><big>(</big><em>headers_seqs</em>, <em>filename</em>, <em>writable_file=False</em><big>)</big><a class="headerlink" href="#sequtils.Write" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes sequences to a FASTA file.</p>
+<p><em>headers_seqs</em> is a list of 2-tuples specifying sequences and their
+corresponding headers.  Each entry is the 2-tuple <em>(header, seq)</em>
+where <em>header</em> is a string giving the header (without the leading &#8220;&gt;&#8221;),
+and <em>seq</em> is the corresponding sequence.</p>
+<p><em>filename</em> is a string that specifies the name of the file to which the
+headers and sequences should be written.  If this file already exists,
+it is overwritten.</p>
+<p><em>writable_file</em> is a Boolean switch specifying that rather than <em>filename</em>
+giving a string specifying the name of a file to which the sequences
+should be written, it instead specifies a writable file object to which
+the sequences should be written.</p>
+<p>The sequences are written to the file in the same order that they are specified
+in <em>headers_seqs</em>.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="sequtils.WriteNEXUS">
+<tt class="descclassname">sequtils.</tt><tt class="descname">WriteNEXUS</tt><big>(</big><em>seqs</em>, <em>outfile</em>, <em>seqtype</em><big>)</big><a class="headerlink" href="#sequtils.WriteNEXUS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write sequences to a NEXUS file.</p>
+<p><em>seqs</em> is a list of 2-tuples specifying sequences as (name, sequence). 
+The sequences should all be aligned so that they are of the same
+length.</p>
+<p><em>outfile</em> is the name of the output file we are writing, such as &#8216;file.nex&#8217;</p>
+<p><em>seqtype</em> is the sequence type, such as &#8216;PROTEIN&#8217; or &#8216;DNA&#8217;</p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="io_module.html"
+                        title="previous chapter"><tt class="docutils literal docutils literal docutils literal"><span class="pre">epitopefinder.io</span></tt> Module</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="align_module.html"
+                        title="next chapter"><tt class="docutils literal docutils literal docutils literal"><span class="pre">epitopefinder.align</span></tt> Module</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/sequtils_module.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="align_module.html" title="epitopefinder.align Module"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="io_module.html" title="epitopefinder.io Module"
+             >previous</a> |</li>
+        <li><a href="index.html">epitopefinder 0.1 documentation</a> &raquo;</li>
+          <li><a href="pythonapi.html" >Python modules</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Jesse D. Bloom.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

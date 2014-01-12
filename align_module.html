@@ -1,0 +1,301 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>epitopefinder.align Module &mdash; epitopefinder 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="epitopefinder 0.1 documentation" href="index.html" />
+    <link rel="up" title="Python modules" href="pythonapi.html" />
+    <link rel="next" title="epitopefinder.plot Module" href="plot_module.html" />
+    <link rel="prev" title="epitope_mapper.sequtils Module" href="sequtils_module.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="plot_module.html" title="epitopefinder.plot Module"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="sequtils_module.html" title="epitope_mapper.sequtils Module"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">epitopefinder 0.1 documentation</a> &raquo;</li>
+          <li><a href="pythonapi.html" accesskey="U">Python modules</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-align">
+<span id="epitopefinder-align-module"></span><h1><tt class="docutils literal"><span class="pre">epitopefinder.align</span></tt> Module<a class="headerlink" href="#module-align" title="Permalink to this headline">¶</a></h1>
+<p>This module contains functions to run sequence alignment programs.</p>
+<p>It can be used to run PROBCONS or MUSCLE.</p>
+<p>Written by Jesse Bloom.</p>
+<dl class="function">
+<dt id="align.AddDots">
+<tt class="descclassname">align.</tt><tt class="descname">AddDots</tt><big>(</big><em>aligned_headers_seqs</em><big>)</big><a class="headerlink" href="#align.AddDots" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds dots at identities in multiple sequence alignment.</p>
+<p>Takes as an argument a list of two or more aligned sequences, as would be
+returned by <cite>Align</cite>.</p>
+<p>Returns a copy of this list.  The first sequence in the list is unchanged.
+In all remaining sequences, dot characters (&#8221;.&#8221;) have been used to
+replace any amino acids that are identical to the amino acid at the 
+same position in the first sequence, except for gap characters.
+Characters are replaced even if they are not of the same case</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">AddDots</span><span class="p">([(</span><span class="s">&#39;seq1&#39;</span><span class="p">,</span> <span class="s">&#39;-TGC&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s">&#39;seq2&#39;</span><span class="p">,</span> <span class="s">&#39;AGGC&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s">&#39;seq3&#39;</span><span class="p">,</span> <span class="s">&#39;-tac&#39;</span><span class="p">)])</span>
+<span class="go">[(&#39;seq1&#39;, &#39;-TGC&#39;), (&#39;seq2&#39;, &#39;AG..&#39;), (&#39;seq3&#39;, &#39;-.a.&#39;)]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="align.Align">
+<tt class="descclassname">align.</tt><tt class="descname">Align</tt><big>(</big><em>headers_seqs</em>, <em>progpath</em>, <em>program='MUSCLE'</em><big>)</big><a class="headerlink" href="#align.Align" title="Permalink to this definition">¶</a></dt>
+<dd><p>Performs a multiple sequence alignment of two or more sequences.</p>
+<p>By default, the protein sequences are aligned using MUSCLE. This
+program can be used to align either nucleotide or protein
+sequences. You can also use PROBCONS to align protein sequences.</p>
+<p><em>headers_seqs</em> is a list specifying the names of the sequences that we
+want to align.  Each entry is a 2-tuple <em>(head, seq)</em> where <em>head</em> is
+a header giving the sequence name and other information (might be empty)
+and <em>seq</em> is a string giving the protein sequence.  The list must have
+at least 2 entries.</p>
+<p><em>progpath</em> specifies a directory containing the alignment program executable,
+either PROBCONS or MUSCLE.  The PROBCONS executable is assumed to have
+the name &#8220;probcons&#8221; in this directory.  The MUSCLE executable is assumed to
+have the name &#8220;muscle&#8221; in this directory.</p>
+<p><em>program</em> specifies what program to use for the alignment. By default, it is
+&#8220;MUSCLE&#8221;.  If you wish to use PROBCONS instead, set it to &#8220;PROBCONS&#8221;.</p>
+<p>This executable is used to perform a multiple sequence alignment 
+with the default settings of PROBCONS or MUSCLE.  The returned variable is a
+new list <em>aligned_headers_seqs</em>. Each entry is a 2-tuple <em>(head, aligned_seq)</em>.  
+<em>head</em> has the same meaning as on input (the sequence header) and 
+<em>aligned_seq</em> is the aligned sequence, with gaps inserted as &#8216;-&#8216;
+as appropriate.  Therefore, all of the <em>aligned_seq</em> entries in
+<em>aligned_headers_seqs</em> are the same length. Entries in <em>aligned_headers_seq</em>
+are in the same order as in the input list <em>headers_seqs</em>.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="align.GetEpitopeAlignments">
+<tt class="descclassname">align.</tt><tt class="descname">GetEpitopeAlignments</tt><big>(</big><em>epitope</em>, <em>targetseqs</em>, <em>maxmismatches</em>, <em>musclepath</em><big>)</big><a class="headerlink" href="#align.GetEpitopeAlignments" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finds alignments of an epitope to one or more target sequences.</p>
+<p><em>epitope</em> is a string giving the sequence of an epitope sequence.</p>
+<p><em>targetseqs</em> is a list of one more <em>(header, sequence)</em> tuples.
+These tuples give the target protein sequences to which we 
+attempt to align <em>epitope</em>. If there are multiple sequences,
+they must be aligned (i.e. all of the same length).</p>
+<p><em>maxmismatches</em> is the maximum number of mismatches that are
+allowed for an epitope to still be considered a match.</p>
+<p><em>musclepath</em> is the path to a directory containing the
+MUSCLE alignment program.</p>
+<p>This function uses MUSCLE to align <em>epitope</em> to each of the
+sequences in <em>targetseq</em>. If it aligns with &lt;= <em>maxmismatches</em>
+mismatches and with no gaps, then this is considered a valid
+alignment. The possible outcomes are:</p>
+<blockquote>
+<div><ul class="simple">
+<li>A return value of <em>False</em> if <em>epitope</em> does not align
+to any of the sequences in <em>targetseqs</em> with the
+specified identity and no gaps.</li>
+<li>A 3-tuple of the form <em>(alignstart, alignend, heads)</em>
+if <em>epitope</em> aligns to one or more of the sequences
+in <em>targetseqs</em>. In this case, <em>epitope</em> must align
+to the same position in all of the target sequences
+to which it aligns. <em>alignstart</em> is the index of
+the first position in the target sequence in which
+this alignment starts (in 1, 2, ... numbering of
+the sequence as it appears in <em>targetseq</em>), <em>alignend</em>
+is the index of the last position in the target 
+sequence (1, 2, ... numbering), and <em>heads</em> is a list
+of the headers for all sequences in <em>targetseqs</em> to
+which a successful alignment at these indices was found.</li>
+<li>An Exception is raised if <em>epitope</em> aligns to multiple
+sequences in <em>targetseqs</em> but with different indices.</li>
+</ul>
+</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="align.PairwiseStatistics">
+<tt class="descclassname">align.</tt><tt class="descname">PairwiseStatistics</tt><big>(</big><em>aligned_headers_seqs</em><big>)</big><a class="headerlink" href="#align.PairwiseStatistics" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the number of gaps and identities in a pairwise alignment.</p>
+<dl class="docutils">
+<dt>This method is designed to compute statistics about an alignment of two</dt>
+<dd>sequences.</dd>
+</dl>
+<p><em>aligned_headers_seqs</em> is a pair of aligned sequences, as would be returned by
+calling <cite>Align</cite> with two sequences (which should be of the same 
+length since they have been aligned).  That is, it is a list of 2-tuples:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">[(</span><span class="n">head1</span><span class="p">,</span> <span class="n">alignedseq1</span><span class="p">),</span> <span class="p">(</span><span class="n">head2</span><span class="p">,</span> <span class="n">alignedseq2</span><span class="p">)]</span>
+</pre></div>
+</div>
+<p>The method returns the 2-tuple <em>(identities, gaps)</em>.  <em>identities</em> is a number
+between zero and one.  It is the fraction of residues in one
+sequence that are aligned with identical residues in the other sequence, gaps
+not being included in the tally.  This is computed by dividing the number of
+identities by the total length of the aligned sequence excluding gaps.
+<em>gaps</em> is the fraction of gaps in the 
+alignment.  It is the fraction of the positions in the alignment where
+either sequence has a gap.  So it is computed by dividing the total number
+of gaps by the length of the aligned sequences.  Upper and lower case 
+nucleotides are treated equivalently.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="nb">round</span><span class="p">(</span><span class="n">PairwiseStatistics</span><span class="p">([(</span><span class="s">&#39;seq1&#39;</span><span class="p">,</span> <span class="s">&#39;TGCAT&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s">&#39;seq2&#39;</span><span class="p">,</span> <span class="s">&#39;AG-AT&#39;</span><span class="p">)])[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">0.75</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="nb">round</span><span class="p">(</span><span class="n">PairwiseStatistics</span><span class="p">([(</span><span class="s">&#39;seq1&#39;</span><span class="p">,</span> <span class="s">&#39;tgcat&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s">&#39;seq2&#39;</span><span class="p">,</span> <span class="s">&#39;AG-AT&#39;</span><span class="p">)])[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">0.2</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="align.RemoveDots">
+<tt class="descclassname">align.</tt><tt class="descname">RemoveDots</tt><big>(</big><em>aligned_headers_seqs</em><big>)</big><a class="headerlink" href="#align.RemoveDots" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes dots at identities in a multiple sequence alignment.</p>
+<p>This function effectively undoes what can be done by &#8216;AddDots&#8217;.</p>
+<p>Takes as an argument a list of two or more aligned sequences
+in the form of (header, sequence) tuples, as would be returned
+by <strong>Align</strong>.</p>
+<p>Returns a copy of this list.  Any positions where one of the sequences
+after the first sequence has a &#8216;.&#8217; character, the amino acid
+is changed to that found at the same position in the first sequence.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">RemoveDots</span><span class="p">([(</span><span class="s">&#39;seq1&#39;</span><span class="p">,</span> <span class="s">&#39;-TGC&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s">&#39;seq2&#39;</span><span class="p">,</span> <span class="s">&#39;AG..&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s">&#39;seq3&#39;</span><span class="p">,</span> <span class="s">&#39;-.a.&#39;</span><span class="p">)])</span>
+<span class="go">[(&#39;seq1&#39;, &#39;-TGC&#39;), (&#39;seq2&#39;, &#39;AGGC&#39;), (&#39;seq3&#39;, &#39;-TaC&#39;)]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="align.StripGapsToFirstSequence">
+<tt class="descclassname">align.</tt><tt class="descname">StripGapsToFirstSequence</tt><big>(</big><em>aligned_headers_seqs</em><big>)</big><a class="headerlink" href="#align.StripGapsToFirstSequence" title="Permalink to this definition">¶</a></dt>
+<dd><p>Strips gaps from a reference sequence, and all corresponding alignments.</p>
+<p>On input, <em>aligned_headers_seqs</em> should be a set of two or more aligned sequences,
+as would be returned by <cite>Align</cite>.</p>
+<p>The first sequence in this alignment is taken to correspond to the reference sequence.
+The returned variable is a list similar to aligned_headers_seqs, but with
+all positions corresponding to gaps in this reference sequence stripped away.
+All gaps (&#8216;-&#8216;) characters are removed from this reference sequence.  In addition,
+in all other aligned sequences in <em>aligned_headers_seqs</em>, every character at
+the same position as a gap in the reference sequence is removed.  Therefore,
+at the end of this procedure, all of the alignments have the same length
+as the reference sequence with its gaps stripped away.  The headers are 
+unchanged.  The order of sequences in this stripped alignment is also
+unchanged.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">StripGapsToFirstSequence</span><span class="p">([(</span><span class="s">&#39;s1&#39;</span><span class="p">,</span> <span class="s">&#39;-AT-A-GC&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s">&#39;s2&#39;</span><span class="p">,</span> <span class="s">&#39;AAT-TAGC&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s">&#39;s3&#39;</span><span class="p">,</span> <span class="s">&#39;--T-A-GC&#39;</span><span class="p">)])</span>
+<span class="go">[(&#39;s1&#39;, &#39;ATAGC&#39;), (&#39;s2&#39;, &#39;ATTGC&#39;), (&#39;s3&#39;, &#39;-TAGC&#39;)]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="align.StripLeadingTrailingGapsToFirstSequence">
+<tt class="descclassname">align.</tt><tt class="descname">StripLeadingTrailingGapsToFirstSequence</tt><big>(</big><em>aligned_headers_seqs</em><big>)</big><a class="headerlink" href="#align.StripLeadingTrailingGapsToFirstSequence" title="Permalink to this definition">¶</a></dt>
+<dd><p>Strips leading / trailing gaps from first sequence, and trims corresponding alignments.</p>
+<p>On input, <em>aligned_headers_seqs</em> is a set of two or more aligned sequences,
+as would be returned by <cite>Align</cite>.</p>
+<p>The first sequence in the alignment corresponds to the reference sequence.
+The returned variable is a list similar to <em>aligned_headers_seqs</em>, but all
+leading / trailing gaps have been stripped from the reference sequence.  A leading
+gap (&#8216;-&#8216;) is one that precedes the first non-gap character; a trailing gap is
+one that follows the last non-gap character.  All other sequences have all
+positions corresponding the leading/trailing gaps of the reference sequence
+trimmed as well.  The headers and order of sequences are preserved.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">StripLeadingTrailingGapsToFirstSequence</span><span class="p">([(</span><span class="s">&#39;s1&#39;</span><span class="p">,</span> <span class="s">&#39;--ATA-GC-&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s">&#39;s2&#39;</span><span class="p">,</span> <span class="s">&#39;TGATTA-CA&#39;</span><span class="p">)])</span>
+<span class="go">[(&#39;s1&#39;, &#39;ATA-GC&#39;), (&#39;s2&#39;, &#39;ATTA-C&#39;)]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="sequtils_module.html"
+                        title="previous chapter"><tt class="docutils literal"><span class="pre">epitope_mapper.sequtils</span></tt> Module</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="plot_module.html"
+                        title="next chapter"><tt class="docutils literal docutils literal"><span class="pre">epitopefinder.plot</span></tt> Module</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/align_module.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="plot_module.html" title="epitopefinder.plot Module"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="sequtils_module.html" title="epitope_mapper.sequtils Module"
+             >previous</a> |</li>
+        <li><a href="index.html">epitopefinder 0.1 documentation</a> &raquo;</li>
+          <li><a href="pythonapi.html" >Python modules</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Jesse D. Bloom.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

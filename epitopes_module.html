@@ -1,0 +1,455 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>epitopefinder.epitopes Module &mdash; epitopefinder 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="epitopefinder 0.1 documentation" href="index.html" />
+    <link rel="up" title="Python modules" href="pythonapi.html" />
+    <link rel="next" title="epitopefinder.io Module" href="io_module.html" />
+    <link rel="prev" title="Python modules" href="pythonapi.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="io_module.html" title="epitopefinder.io Module"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="pythonapi.html" title="Python modules"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">epitopefinder 0.1 documentation</a> &raquo;</li>
+          <li><a href="pythonapi.html" accesskey="U">Python modules</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-epitopes">
+<span id="epitopefinder-epitopes-module"></span><h1><tt class="docutils literal"><span class="pre">epitopefinder.epitopes</span></tt> Module<a class="headerlink" href="#module-epitopes" title="Permalink to this headline">¶</a></h1>
+<p>Module for reading and handling epitopes.</p>
+<p>This module is for handling information about epitopes. It is
+designed principally with the goal of parsing epitopes from the
+Immune Epitope Database (www.iedb.org).</p>
+<p>Written by Jesse Bloom.</p>
+<div class="section" id="functions-defined-in-this-module">
+<h2>Functions defined in this module<a class="headerlink" href="#functions-defined-in-this-module" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><cite>ReadCompactIEDB</cite> : reads compact CSV downloads from Immune Epitope Database</li>
+<li><cite>SplitCSVLine</cite> : returns entries in CSV file line (allowing quotations)</li>
+<li><cite>ReadSuperTypeClassification</cite> : reads in supertype classification scheme.</li>
+<li><cite>AssignAlleleInfo</cite> : assigns allele to mhcclass, mhcgene, supertype</li>
+<li><cite>PurgeRedundantEpitopes</cite> : purges potentially redundant epitopes.</li>
+<li><cite>PrintAlleleSummary</cite> : prints summary of allele assignments</li>
+<li><cite>EpitopeSummaryString</cite> : string summary of epitope in CSV format.</li>
+</ul>
+</div>
+<div class="section" id="classes-defined-in-this-module">
+<h2>Classes defined in this module<a class="headerlink" href="#classes-defined-in-this-module" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><cite>Epitope</cite> : a class for storing epitope information.</li>
+</ul>
+</div>
+<div class="section" id="details-of-classes-and-functions">
+<h2>Details of classes and functions<a class="headerlink" href="#details-of-classes-and-functions" title="Permalink to this headline">¶</a></h2>
+<p>Details of classes and functions are provided in their individual
+docstrings below.</p>
+<dl class="function">
+<dt id="epitopes.AssignAlleleInfo">
+<tt class="descclassname">epitopes.</tt><tt class="descname">AssignAlleleInfo</tt><big>(</big><em>ep</em>, <em>supertype_d</em><big>)</big><a class="headerlink" href="#epitopes.AssignAlleleInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assigns an MHC allele to its mhcclass, mhcgene, and supertype.</p>
+<p>Currently this only assigns alleles for <em>ep.host</em> equal
+to &#8216;Homo sapiens&#8217; or some subset (such as &#8216;Homo sapiens Caucasian&#8217;).</p>
+<p>CALLING VARIABLES:</p>
+<ul class="simple">
+<li><em>ep</em> is an epitope object that should have its <em>ep.mhcallele</em>
+and <em>ep.host</em> attributes assigned. Using these attributes, attempts
+to assign <em>ep.mhcclass</em>, <em>ep.mhcgene</em>, <em>mhc.group</em>, and <em>ep.supertype</em>
+attributes. On completion of this function, <em>ep</em> will have these
+attributes assigned if possible. Note, however, that some of them still
+may be <em>None</em> if for example <em>ep.mhcallele</em> specifically
+does not contain this information (for example if it is
+&#8216;HLA-Class II, allele undetermined&#8217;, or if <em>ep.mhcallele</em> is <em>None</em>.</li>
+<li><em>supertype_d</em> is a dictionary classifying alleles to supertypes,
+in the format returned by <em>ReadSuperTypeClassifications</em>. It should
+assign supertypes for all class I alleles.</li>
+</ul>
+<p>RETURN VALUE</p>
+<p>On return, <em>ep</em> will have its <em>mhcclass</em>, <em>mhcgene</em>, <em>mhcgroup</em>,
+and <em>supertype</em> attributes updated. Note that they may still be
+<em>None</em> if they are not assignable from <em>ep.mhcallele</em>.</p>
+<p>This function will raise an exception if <em>ep.mhcallele</em> cannot be
+processed.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="epitopes.Epitope">
+<em class="property">class </em><tt class="descclassname">epitopes.</tt><tt class="descname">Epitope</tt><big>(</big><em>host=None</em>, <em>sourceorganism=None</em>, <em>sourcemolecule=None</em>, <em>sequence=None</em>, <em>mhcallele=None</em>, <em>assay=None</em>, <em>reference=None</em>, <em>position=None</em>, <em>mhcclass=None</em>, <em>mhcgene=None</em>, <em>mhcgroup=None</em>, <em>supertype=None</em><big>)</big><a class="headerlink" href="#epitopes.Epitope" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>Class for storing epitope information.</p>
+<p>This class defines <em>Epitope</em> objects, which can be used to store
+information about epitopes.</p>
+<p>Each Epitope object <em>ep</em> possesses the following attributes. If the attribute
+is not defined for an epitope on initialization, then that
+attribute is set to <em>None</em>:</p>
+<blockquote>
+<div><ul>
+<li><p class="first"><em>ep.host</em> : a string giving the host organism, for example &#8216;Homo sapiens&#8217;</p>
+</li>
+<li><p class="first"><em>ep.sourceorganism</em> : a string giving the source organism, for example
+&#8216;Influenza A virus&#8217;</p>
+</li>
+<li><p class="first"><em>ep.sourcemolecule</em> : a string giving the source molecule, for example
+&#8216;Nucleoprotein&#8217;</p>
+</li>
+<li><p class="first"><em>ep.sequence</em> : a string giving the sequence of the epitope, 
+for example &#8216;GILGFVFTL&#8217;. If <em>sequence</em> is assigned upon
+initialization of <em>ep</em>, then it will be converted to all upper case.</p>
+</li>
+<li><p class="first"><em>ep.mhcallele</em> : a string giving the MHC allele, for example 
+&#8216;HLA-B*35:01&#8217;</p>
+</li>
+<li><p class="first"><em>ep.assay</em> : a string giving the assay used identify the epitope, 
+for example &#8216;ELISPOT; cytokine release IFNg&#8217;</p>
+</li>
+<li><p class="first"><em>ep.reference</em> : a string giving the reference for the epitope, for
+example: &#8216;T Linnemann; G Jung; P Walden. J Virol. (2000). PMID 10954576&#8217;</p>
+</li>
+<li><p class="first"><em>ep.position</em> : a 2-tuple giving the position in the protein as
+the starting and ending integer sequence positions, for example
+<em>(46, 54)</em></p>
+</li>
+<li><p class="first"><em>ep.mhcclass</em> : a string &#8216;I&#8217; or &#8216;II&#8217; specifying whether the epitope
+is MHC class I or MHC class II.</p>
+</li>
+<li><p class="first"><em>ep.mhcgene</em> : a string specifying the MHC gene. For example,
+for humans could be &#8216;A&#8217;, &#8216;B&#8217;, &#8216;C&#8217;, &#8216;DQA1&#8217;, &#8216;DQB1&#8217;,
+&#8216;DPA1&#8217;, &#8216;DPB1&#8217;, &#8216;DRB1&#8217;, &#8216;DRB3&#8217;, &#8216;DRB4&#8217;, &#8216;DRB5&#8217;.</p>
+</li>
+<li><dl class="first docutils">
+<dt><em>ep.supertype</em> <span class="classifier-delimiter">:</span> <span class="classifier">a string giving the supertype assigned to</span></dt>
+<dd><p class="first last">an allele. For example, &#8216;A01&#8217; or &#8216;B27&#8217;.</p>
+</dd>
+</dl>
+</li>
+<li><p class="first"><em>ep.mhcgroup</em> : a string specifying the MHC group. For example,
+for &#8216;HLA-B*35:01&#8217; this would be &#8216;35&#8217;.</p>
+</li>
+</ul>
+</div></blockquote>
+<p>To initialize an <em>Epitope</em> object, there are no required arguments, however,
+each of the above attributes can be assigned at initialization (unassigned
+attributes are set to <em>None</em>). For instance:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">ep</span> <span class="o">=</span> <span class="n">Epitope</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s">&#39;Homo sapiens&#39;</span><span class="p">,</span> <span class="n">sequence</span><span class="o">=</span><span class="s">&#39;GILGFVFTL&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>returns an <em>Epitope</em> object <em>ep</em> with <em>ep.host</em> set to &#8216;Homo sapiens&#8217;, 
+<em>ep.sequence</em> set to &#8216;GILGFVFTL&#8217;, and all other attributes set to
+<em>None</em>.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="epitopes.EpitopeSummaryString">
+<tt class="descclassname">epitopes.</tt><tt class="descname">EpitopeSummaryString</tt><big>(</big><em>ep</em>, <em>position</em><big>)</big><a class="headerlink" href="#epitopes.EpitopeSummaryString" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a string summary of epitope in CSV format.</p>
+<p><em>ep</em> is an <em>Epitope</em> object.</p>
+<p><em>position</em> is a 2-tuple of the format <em>(start, end)</em> indicating the
+starting and ending position to which <em>ep</em> aligns in the target sequence.</p>
+<p>Returns a string in CSV format (entries each surrounded by quotes and
+separated by commas) of epitope <em>ep</em> and its alignment position. There are
+five entries:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>The epitope sequence.</li>
+<li>The starting and ending alignment position separated by a dash.</li>
+<li>The MHC allele information.</li>
+<li>Information about the epitope source / host and alignment
+position as taken from the source.</li>
+<li>The reference for the epitope.</li>
+</ol>
+</div></blockquote>
+<p>Here is an example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">ep</span> <span class="o">=</span> <span class="n">Epitope</span><span class="p">(</span><span class="n">assay</span><span class="o">=</span><span class="s">&#39;51 chromium release, cytotoxicity&#39;</span><span class="p">,</span> <span class="n">mhcclass</span><span class="o">=</span><span class="s">&#39;I&#39;</span><span class="p">,</span> <span class="n">reference</span><span class="o">=</span><span class="s">&#39;L G Tussey; S Rowland-Jones; T S Zheng; M J Androlewicz; P Cresswell; J A Frelinger; A J McMichael. Immunity. 1995. PMID 7542549&#39;</span><span class="p">,</span> <span class="n">sequence</span><span class="o">=</span><span class="s">&#39;LRSRYWAI&#39;</span><span class="p">,</span> <span class="n">sourcemolecule</span><span class="o">=</span><span class="s">&#39;NP&#39;</span><span class="p">,</span> <span class="n">mhcallele</span><span class="o">=</span><span class="s">&#39;HLA-B*27:02&#39;</span><span class="p">,</span> <span class="n">host</span><span class="o">=</span><span class="s">&#39;Homo sapiens&#39;</span><span class="p">,</span> <span class="n">sourceorganism</span><span class="o">=</span><span class="s">&#39;Influenza A virus (A/X-31(H3N2))&#39;</span><span class="p">,</span> <span class="n">mhcgroup</span><span class="o">=</span><span class="s">&#39;27&#39;</span><span class="p">,</span> <span class="n">supertype</span><span class="o">=</span><span class="s">&#39;B27&#39;</span><span class="p">,</span> <span class="n">position</span><span class="o">=</span><span class="p">(</span><span class="mi">381</span><span class="p">,</span> <span class="mi">388</span><span class="p">),</span> <span class="n">mhcgene</span><span class="o">=</span><span class="s">&#39;B&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">position</span> <span class="o">=</span> <span class="p">(</span><span class="mi">381</span><span class="p">,</span> <span class="mi">388</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">EpitopeSummaryString</span><span class="p">(</span><span class="n">ep</span><span class="p">,</span> <span class="n">position</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">s</span>
+<span class="go">&quot;LRSRYWAI&quot;,&quot;381-388&quot;,&quot;allele HLA-B*27:02; MHC class I; MHC gene B; MHC supertype B27; MHC group 27&quot;,&quot;host = Homo sapiens; source = Influenza A virus (A/X-31(H3N2)); molecule = NP; reported position = (381, 388); assay = 51 chromium release, cytotoxicity&quot;,&quot;L G Tussey; S Rowland-Jones; T S Zheng; M J Androlewicz; P Cresswell; J A Frelinger; A J McMichael. Immunity. 1995. PMID 7542549&quot;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="epitopes.PrintAlleleSummary">
+<tt class="descclassname">epitopes.</tt><tt class="descname">PrintAlleleSummary</tt><big>(</big><em>eps</em>, <em>out</em><big>)</big><a class="headerlink" href="#epitopes.PrintAlleleSummary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Summarizes allele classifications for epitopes.</p>
+<p><em>eps</em> should be a list of <em>Epitope</em> objects. Each of them should
+have been passed through <em>AssignAlleleInfo</em>.</p>
+<p><em>out</em> is a writable file-like object.</p>
+<p>Writes a summary to <em>out</em> of the allele assignments for the
+epitopes in <em>eps</em>, as based on the <em>mhcclass</em>, <em>mhcgene</em>, <em>mhcgroup</em>,
+<em>supertype</em> attributes of the objects in this list. This summary
+contains information such as how many have each of these attributes
+assigned.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="epitopes.PurgeRedundantEpitopes">
+<tt class="descclassname">epitopes.</tt><tt class="descname">PurgeRedundantEpitopes</tt><big>(</big><em>epitopes</em>, <em>alignmentpositions</em>, <em>overlap</em>, <em>mhc_classification</em><big>)</big><a class="headerlink" href="#epitopes.PurgeRedundantEpitopes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Purges potentially redundant epitopes.</p>
+<p>Given a list of epitopes (<em>epitopes</em>) and the positions to which they align
+in a target protein (<em>alignmentpositions</em>), find all epitopes that overlap
+by &gt;= <em>overlap</em> sites in their alignment to the target. These epitopes are
+then examined to see if they clearly come from a different MHC classification
+(according to the option <em>mhc_classification</em>) &#8211; if they do not, then
+the redundant epitopes are removed.</p>
+<p>For this process, the epitopes are first sorted so that those with
+the shortest epitope sequence (best defined sequence) come first.
+Among epitopes with the same sequence lengths, those with the
+most detailed MHC classification are sorted to come first. We then
+move down this list asking which epitopes are redundant with these
+epitopes. Moving from shortest to longest ensures that distinct
+short epitopes that overlap the same longer epitope are not considered
+redundant.</p>
+<p>CALLING VARIABLES:</p>
+<ul>
+<li><p class="first"><em>epitopes</em> is a list of <em>Epitope</em> objects specifying the epitopes.
+At a minimum, they should all have their <em>ep.sequence</em> attribute set
+to a string.</p>
+</li>
+<li><p class="first"><em>alignmentpositions</em> is a list of 2-tuples of the same length
+as <em>epitopes</em>. For each epitope <em>epitopes[i]</em>, the 2-tuple
+<em>alignmentpositions[i] = (alignstart, alignend)</em> gives the position
+that this epitope aligns to in the target protein. The epitope aligns
+to positions <em>j</em> where <em>alignstart &lt;= j &lt;= alignend</em>. These
+alignment positions are used to determine the extent to which
+two epitopes overlap in their alignment.</p>
+</li>
+<li><p class="first"><em>overlap</em> is a string specifying the amount of overlap that two epitopes
+must possess before they are considered potentially redundant. Any two
+epitopes that overlap (as determined by <em>alignmentpositions</em>) by &gt;=
+<em>overlap</em> residues are potentially redundant.</p>
+</li>
+<li><p class="first"><em>mhc_classification</em> is how we determine whether two epitopes with
+&gt;= <em>overlap</em> alignment are indeed redundant. Possible values are
+the following strings:</p>
+<blockquote>
+<div><ul class="simple">
+<li><em>MHCgene</em> two overlapping epitopes are considered redundant
+if they share their <em>ep.mhcgene</em> attributes (or if one has 
+this attribute set to <em>None</em>).</li>
+<li><em>MHCsupertype</em> two overlapping epitopes are considered redundant
+if they share their <em>ep.mhcgene</em> attribute and if they share
+their <em>ep.supertype</em> attribute. An attribute set to <em>None</em>
+is considered to match any other value of the attribute.</li>
+<li><em>MHCgroup</em> two overlapping epitopes are considered redundant
+if they share their <em>ep.mhcgene</em>, <em>ep.supertype</em>, and <em>ep.mhcgroup</em>
+attributes. An attribute set to <em>None</em> is considered to match 
+any other value of the attribute.</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+<p>RETURN VARIABLE:</p>
+<p>This function returns the 4-tuple 
+<em>(unique_epitopes, unique_positions, redundant_epitopes, redundant_positions)</em>.
+All three elements of this 3-tuple are lists of the same length. The list
+<em>unique_epitopes</em> contains one representative of each set of redundant
+epitopes, and it always contains the one with the shortest <em>ep.sequence</em>.
+For each epitope <em>unique_epitopes[i]</em>, the element <em>unique_positions[i]</em>
+is a 2-tuple of numbers specifying the epitope alignment position as
+in <em>alignmentpositions</em>.
+For each element <em>i</em> of <em>unique_epitopes</em>, the element <em>redundant_epitopes[i]</em>
+is a list of all other epitopes redundant with <em>unique_epitopes[i]</em>. If there
+are no such redundant epitopes, then <em>redundant_epitopes[i]</em> is an empty list.
+For each element <em>j</em> of <em>redundant_epitopes[i]</em>, the element 
+<em>redundant_positions[i][j]</em> is the 2-tuple of numbers specifying the
+epitope alignment position for redundant epitope <em>redundant_epitopes[i][j]</em>
+as in <em>alignmentpositions</em>.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="epitopes.ReadCompactIEDB">
+<tt class="descclassname">epitopes.</tt><tt class="descname">ReadCompactIEDB</tt><big>(</big><em>infile</em><big>)</big><a class="headerlink" href="#epitopes.ReadCompactIEDB" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads epitopes from compact CSV downloads from Immune Epitope Database.</p>
+<p>This script reads the compact form of the CSV file downloads that
+can be made of sets of epitopes from the Immune Epitope Database 
+(www.iedb.org). If the format of these CSV files is radically 
+reconfigured then this function may no longer work &#8211; howevever, it
+is designed to hopefully raise an Exception in that case rather than
+give spurious output. It functioned well on files downloaded
+on April-15-2013, and will presumably function on downloads from other
+dates although that has not been confirmed.</p>
+<p><em>infile</em> should be a string giving the name of a CSV file download.
+It is assumed that this file contains only epitopes for which the assay
+result is &#8216;Positive&#8217;. If it contains entries for which the result is
+not &#8216;Positive&#8217;, then raises an exception.</p>
+<p>The function returns a list <em>epitopelist</em> where each entry is
+an <em>Epitope</em> object containing the relevant information for an
+epitope in <em>infile</em>.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="epitopes.ReadSuperTypeClassification">
+<tt class="descclassname">epitopes.</tt><tt class="descname">ReadSuperTypeClassification</tt><big>(</big><em>supertypesfile</em>, <em>unclassified_to_none=True</em><big>)</big><a class="headerlink" href="#epitopes.ReadSuperTypeClassification" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads in supertype classification scheme.</p>
+<p><em>supertypesfile</em> is the name of a file specifying the <em>supertype</em>
+classifications. This file contains lines that list the alleles
+it should contain lines listing
+at the <tt class="docutils literal"><span class="pre">mhcgene*mhcgroup:protein</span></tt> level of detail, followed by the supertype.
+Supertypes of &#8216;Unclassified&#8217; are assigned <em>None</em>:</p>
+<div class="highlight-python"><pre>A*01:01 A01
+A*01:02 Unclassified
+A*68:15 A02
+B*07:43 B07
+B*08:01 B08</pre>
+</div>
+<p><em>unclassified_to_none</em> is an optional argument which is <em>True</em> by
+default. It specifies that if an allele has a supertype classification
+of &#8216;Unclassified&#8217;, in the returned dictionary then the value is set to
+<em>None</em> for the supertype.</p>
+<p>This function returns a dictionary keyed by the alleles (at
+the <tt class="docutils literal"><span class="pre">mhcgene*mhcgroup:protein</span></tt> level, and with values being the
+supertype classification for that allele.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="epitopes.SplitCSVLine">
+<tt class="descclassname">epitopes.</tt><tt class="descname">SplitCSVLine</tt><big>(</big><em>line</em><big>)</big><a class="headerlink" href="#epitopes.SplitCSVLine" title="Permalink to this definition">¶</a></dt>
+<dd><p>Splits CSV line where entries can be in quotes.</p>
+<p>This function takes a single argument <em>line</em>, which is a string
+specifying a line from a CSV (comma-separated values) file. The
+line is split into entries based on the comman, with the exception
+that entries themselves can be in quotes and a quoted entry is not
+split even if it has a comma. This makes this function different
+than just <em>line.split(&#8216;,&#8217;)</em> which will split entries even if
+the comma is in quotes. However, this function currently does not handle
+lines with quotes as part of the line entries.</p>
+<p>The returned value is a list of the entries in the line, with leading
+/ trailing whitespace removed.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">SplitCSVLine</span><span class="p">(</span><span class="s">&#39;entry1,entry2,entry3&#39;</span><span class="p">)</span>
+<span class="go">[&#39;entry1&#39;, &#39;entry2&#39;, &#39;entry3&#39;]</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">SplitCSVLine</span><span class="p">(</span><span class="s">&#39;&quot;entry1&quot;,&quot;entry2,two&quot;,entry3 &#39;</span><span class="p">)</span>
+<span class="go">[&#39;entry1&#39;, &#39;entry2,two&#39;, &#39;entry3&#39;]</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">SplitCSVLine</span><span class="p">(</span><span class="s">&#39;entry1,entry&quot;2&quot;,entry3&#39;</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+   <span class="c">...</span>
+<span class="gr">ValueError</span>: <span class="n">entry contains internal quote</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">SplitCSVLine</span><span class="p">(</span><span class="s">&#39; &#39;</span><span class="p">)</span>
+<span class="go">[]</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">SplitCSVLine</span><span class="p">(</span><span class="s">&#39;,,entry3 &#39;</span><span class="p">)</span>
+<span class="go">[&#39;&#39;, &#39;&#39;, &#39;entry3&#39;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><tt class="docutils literal"><span class="pre">epitopefinder.epitopes</span></tt> Module</a><ul>
+<li><a class="reference internal" href="#functions-defined-in-this-module">Functions defined in this module</a></li>
+<li><a class="reference internal" href="#classes-defined-in-this-module">Classes defined in this module</a></li>
+<li><a class="reference internal" href="#details-of-classes-and-functions">Details of classes and functions</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="pythonapi.html"
+                        title="previous chapter">Python modules</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="io_module.html"
+                        title="next chapter"><tt class="docutils literal"><span class="pre">epitopefinder.io</span></tt> Module</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/epitopes_module.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="io_module.html" title="epitopefinder.io Module"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="pythonapi.html" title="Python modules"
+             >previous</a> |</li>
+        <li><a href="index.html">epitopefinder 0.1 documentation</a> &raquo;</li>
+          <li><a href="pythonapi.html" >Python modules</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Jesse D. Bloom.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

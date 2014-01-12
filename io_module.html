@@ -1,0 +1,323 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>epitopefinder.io Module &mdash; epitopefinder 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="epitopefinder 0.1 documentation" href="index.html" />
+    <link rel="up" title="Python modules" href="pythonapi.html" />
+    <link rel="next" title="epitope_mapper.sequtils Module" href="sequtils_module.html" />
+    <link rel="prev" title="epitopefinder.epitopes Module" href="epitopes_module.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="sequtils_module.html" title="epitope_mapper.sequtils Module"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="epitopes_module.html" title="epitopefinder.epitopes Module"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">epitopefinder 0.1 documentation</a> &raquo;</li>
+          <li><a href="pythonapi.html" accesskey="U">Python modules</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-io">
+<span id="epitopefinder-io-module"></span><h1><tt class="docutils literal"><span class="pre">epitopefinder.io</span></tt> Module<a class="headerlink" href="#module-io" title="Permalink to this headline">¶</a></h1>
+<p>Module for performing input/output operations.</p>
+<p>Functions are:</p>
+<p><em>ParseInfile</em> : reads key / value pairs from an input file.</p>
+<p><em>ParseBoolValue</em> : reads Boolean values from input dictionary.</p>
+<p><em>ParseIntValue</em> : reads integer values from input dictionary.</p>
+<p><em>ParseFloatValue</em> : reads float values from input dictionary.</p>
+<p><em>ParseStringValue</em> : reads string values from input dictionary.</p>
+<p><em>ParseSeqValue</em> : reads sequence from file specified by input dictionary.</p>
+<p><em>ParseFileList</em> : reads file list specified by input dictionary.</p>
+<p>Written by Jesse Bloom.</p>
+<dl class="function">
+<dt id="io.ParseBoolValue">
+<tt class="descclassname">io.</tt><tt class="descname">ParseBoolValue</tt><big>(</big><em>d</em>, <em>key</em><big>)</big><a class="headerlink" href="#io.ParseBoolValue" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets Boolean argument from input dictionary.</p>
+<p><em>d</em> is a dictionary of key/value string pairs as returned by
+<strong>ParseInfile</strong>.</p>
+<p><em>key</em> is a string in this dictionary that specifies a value that
+should be <em>True</em> or <em>False</em>.</p>
+<p>Returns the Boolean truth value specified by <em>key</em>. Raises a <em>ValueError</em>
+if <em>key</em> does not exist in <em>d</em>, and a <em>ValueError</em> if it specifies
+something other than <em>True</em> or <em>False</em>.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;gzipped&#39;</span><span class="p">:</span><span class="s">&#39;True&#39;</span><span class="p">,</span> <span class="s">&#39;applyfilter&#39;</span><span class="p">:</span><span class="s">&#39;False&#39;</span><span class="p">,</span> <span class="s">&#39;a1&#39;</span><span class="p">:</span><span class="s">&#39;a1.txt&#39;</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ParseBoolValue</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="s">&#39;gzipped&#39;</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">ParseBoolValue</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="s">&#39;applyfilter&#39;</span><span class="p">)</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">ParseBoolValue</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="s">&#39;a1&#39;</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+   <span class="c">...</span>
+<span class="gr">ValueError</span>: <span class="n">value a1.txt for a1 is not True/False</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">ParseBoolValue</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="s">&#39;otherkey&#39;</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+   <span class="c">...</span>
+<span class="gr">ValueError</span>: <span class="n">did not find a key for otherkey</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="io.ParseFileList">
+<tt class="descclassname">io.</tt><tt class="descname">ParseFileList</tt><big>(</big><em>d</em>, <em>key</em><big>)</big><a class="headerlink" href="#io.ParseFileList" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets list of files from input dictionary.</p>
+<p><em>d</em> is a dictionary of key/value string pairs as returned by
+<strong>ParseInfile</strong>.</p>
+<p><em>key</em> is a string in this dictionary that specifies a value that
+should give a list of one or more file names.</p>
+<p>Returns a list of the file names specified by <em>key</em>. If one or more of
+these files does not exist, raises and IOError. If key does not
+exist in <em>d</em>, raises and KeyError.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="io.ParseFloatValue">
+<tt class="descclassname">io.</tt><tt class="descname">ParseFloatValue</tt><big>(</big><em>d</em>, <em>key</em><big>)</big><a class="headerlink" href="#io.ParseFloatValue" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets float argument from input dictionary.</p>
+<p><em>d</em> a dictionary of key/value string pairs as returned by
+<strong>ParseInfile</strong>.</p>
+<p><em>key</em> is a string in this dictionary that specifies a value that
+should be convertible to a float.</p>
+<p>Returns the float specified by <em>key</em>. Raises a <em>ValueError</em>
+if <em>key</em> does not exist in <em>d</em>, and a <em>ValueError</em> if it specifies
+something other than an integer.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;maxn&#39;</span><span class="p">:</span><span class="s">&#39;2&#39;</span><span class="p">,</span> <span class="s">&#39;minq&#39;</span><span class="p">:</span><span class="s">&#39;20.5&#39;</span><span class="p">,</span> <span class="s">&#39;string&#39;</span><span class="p">:</span><span class="s">&#39;hello&#39;</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="s">&quot;</span><span class="si">%.1f</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">ParseFloatValue</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="s">&#39;maxn&#39;</span><span class="p">)</span>
+<span class="go">2.0</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="s">&quot;</span><span class="si">%.1f</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">ParseFloatValue</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="s">&#39;minq&#39;</span><span class="p">)</span>
+<span class="go">20.5</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">ParseFloatValue</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="s">&#39;string&#39;</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+   <span class="c">...</span>
+<span class="gr">ValueError</span>: <span class="n">value hello for string is not float</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">ParseFloatValue</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="s">&#39;otherkey&#39;</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+   <span class="c">...</span>
+<span class="gr">ValueError</span>: <span class="n">did not find a key for otherkey</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="io.ParseInfile">
+<tt class="descclassname">io.</tt><tt class="descname">ParseInfile</tt><big>(</big><em>f</em><big>)</big><a class="headerlink" href="#io.ParseInfile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads key / value pairs from an input file.</p>
+<p><em>f</em> should be a readable file-like object.</p>
+<p>Starting at the current position in <em>f</em>, reads all remaining lines
+until the end of the file-like object. Any blank line or line
+with a first character of # is disregarded (# indicates a comment
+line). All other lines should contain exactly two entries, the first
+being the key and the second being the value. The key is construed
+to be the first word, and cannot have any spaces. The value is all
+of the text that follows the key up to the newline. 
+The key / value pairs are returned in a
+dictionary, as illustrated in the example below. If there is a
+duplicate key, and exception is raised.</p>
+<p>Example of successfully reading two key/value pairs</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">cStringIO</span><span class="o">.</span><span class="n">StringIO</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;# comment line followed by blank line</span><span class="se">\n\n</span><span class="s">&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;key1 first_value</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;# now another key with two values</span><span class="se">\n</span><span class="s">key2 2 value2&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ParseInfile</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="o">==</span> <span class="p">{</span><span class="s">&#39;key1&#39;</span><span class="p">:</span><span class="s">&#39;first_value&#39;</span><span class="p">,</span> <span class="s">&#39;key2&#39;</span><span class="p">:</span><span class="s">&#39;2 value2&#39;</span><span class="p">}</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>Example of duplicate key name</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">cStringIO</span><span class="o">.</span><span class="n">StringIO</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;# comment line followed by blank line</span><span class="se">\n\n</span><span class="s">&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;key1 first_value</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;# now another key</span><span class="se">\n</span><span class="s">key2 2&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;</span><span class="se">\n</span><span class="s">key1 1&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ParseInfile</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="o">==</span> <span class="p">{</span><span class="s">&#39;key1&#39;</span><span class="p">:</span><span class="s">&#39;first_value&#39;</span><span class="p">,</span> <span class="s">&#39;key2&#39;</span><span class="p">:</span><span class="s">&#39;2&#39;</span><span class="p">}</span>
+<span class="gt">Traceback (most recent call last):</span>
+    <span class="o">...</span>
+<span class="gr">ValueError</span>: <span class="n">duplicate key: key1</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="io.ParseIntValue">
+<tt class="descclassname">io.</tt><tt class="descname">ParseIntValue</tt><big>(</big><em>d</em>, <em>key</em><big>)</big><a class="headerlink" href="#io.ParseIntValue" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets integer argument from input dictionary.</p>
+<p><em>d</em> is a dictionary of key/value string pairs as returned by
+<strong>ParseInfile</strong>.</p>
+<p><em>key</em> is a string in this dictionary that specifies a value that
+should be an integer.</p>
+<p>Returns the integer specified by <em>key</em>. Raises a <em>ValueError</em>
+if <em>key</em> does not exist in <em>d</em>, and a <em>ValueError</em> if it specifies
+something other than an integer.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;maxn&#39;</span><span class="p">:</span><span class="s">&#39;2&#39;</span><span class="p">,</span> <span class="s">&#39;minq&#39;</span><span class="p">:</span><span class="s">&#39;20.5&#39;</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ParseIntValue</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="s">&#39;maxn&#39;</span><span class="p">)</span>
+<span class="go">2</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">ParseIntValue</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="s">&#39;minq&#39;</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+   <span class="c">...</span>
+<span class="gr">ValueError</span>: <span class="n">value 20.5 for minq is not integer</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">ParseIntValue</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="s">&#39;otherkey&#39;</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+   <span class="c">...</span>
+<span class="gr">ValueError</span>: <span class="n">did not find a key for otherkey</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="io.ParseSeqValue">
+<tt class="descclassname">io.</tt><tt class="descname">ParseSeqValue</tt><big>(</big><em>d</em>, <em>key</em><big>)</big><a class="headerlink" href="#io.ParseSeqValue" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads sequence from FASTA file specified by input dictionary.</p>
+<p><em>d</em> is a dictionary of key/value string pairs as returned by
+<strong>ParseInfile</strong>.</p>
+<p><em>key</em> is a string in this dictionary that specifies a value that is a
+filename of a readable file that contains exactly one sequence
+in FASTA format.</p>
+<p>Returns a string corresponding to the sequence specified in the
+FASTA file. Raises a <em>ValueError</em> if the filename does not exist, or
+does not specify exactly one sequence.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="io.ParseStringValue">
+<tt class="descclassname">io.</tt><tt class="descname">ParseStringValue</tt><big>(</big><em>d</em>, <em>key</em><big>)</big><a class="headerlink" href="#io.ParseStringValue" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads string argument specified by input dictionary.</p>
+<p><em>d</em> is a dictionary of the key/value string pairs as returned by
+<strong>ParseInfile</strong>.</p>
+<p><em>key</em> is a string in this dictionary that specifies a value that
+is a string.</p>
+<p>Returns string corresponding to <em>key</em>. Raises a <em>ValueError</em> if 
+the <em>key</em> does not exist in <em>d</em>.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;outfileprefix&#39;</span><span class="p">:</span><span class="s">&#39;test_example&#39;</span><span class="p">,</span> <span class="s">&#39;samplename&#39;</span><span class="p">:</span><span class="s">&#39;test example&#39;</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ParseStringValue</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="s">&#39;outfileprefix&#39;</span><span class="p">)</span>
+<span class="go">&#39;test_example&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">ParseStringValue</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="s">&#39;samplename&#39;</span><span class="p">)</span>
+<span class="go">&#39;test example&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">ParseStringValue</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="s">&#39;otherkey&#39;</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+   <span class="c">...</span>
+<span class="gr">ValueError</span>: <span class="n">did not find a key for otherkey</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="epitopes_module.html"
+                        title="previous chapter"><tt class="docutils literal docutils literal"><span class="pre">epitopefinder.epitopes</span></tt> Module</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="sequtils_module.html"
+                        title="next chapter"><tt class="docutils literal docutils literal"><span class="pre">epitope_mapper.sequtils</span></tt> Module</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/io_module.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="sequtils_module.html" title="epitope_mapper.sequtils Module"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="epitopes_module.html" title="epitopefinder.epitopes Module"
+             >previous</a> |</li>
+        <li><a href="index.html">epitopefinder 0.1 documentation</a> &raquo;</li>
+          <li><a href="pythonapi.html" >Python modules</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Jesse D. Bloom.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

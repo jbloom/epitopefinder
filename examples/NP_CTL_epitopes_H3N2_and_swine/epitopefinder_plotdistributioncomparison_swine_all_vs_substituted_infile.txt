@@ -1,9 +1,0 @@
-# input file for epitopefinder_plotdistributioncomparison.py
-plotfile distributioncomparison_swine_all_vs_substituted.pdf
-epitopesfile1 epitopesbysite_swine.csv
-epitopesfile2 epitopecounts_substitutedsites_swine.csv
-set1name all
-set2name substituted
-pvalue 100000
-pvaluewithreplacement False
-title swine influenza NP

@@ -1,0 +1,434 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>epitopefinder.plot Module &mdash; epitopefinder 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="epitopefinder 0.1 documentation" href="index.html" />
+    <link rel="up" title="Python modules" href="pythonapi.html" />
+    <link rel="next" title="Acknowledgements" href="acknowledgements.html" />
+    <link rel="prev" title="epitopefinder.align Module" href="align_module.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="acknowledgements.html" title="Acknowledgements"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="align_module.html" title="epitopefinder.align Module"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">epitopefinder 0.1 documentation</a> &raquo;</li>
+          <li><a href="pythonapi.html" accesskey="U">Python modules</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-plot">
+<span id="epitopefinder-plot-module"></span><h1><tt class="docutils literal"><span class="pre">epitopefinder.plot</span></tt> Module<a class="headerlink" href="#module-plot" title="Permalink to this headline">¶</a></h1>
+<p>Module for performing plotting.</p>
+<p>This module uses <tt class="docutils literal"><span class="pre">pylab</span></tt> and <tt class="docutils literal"><span class="pre">matplotlib</span></tt> to make plots. 
+Before running a function in this module, you should use the <em>PylabAvailable</em>
+function to determine if <tt class="docutils literal"><span class="pre">pylab</span></tt> and <tt class="docutils literal"><span class="pre">matplotlib</span></tt> are available. Otherwise,
+calling any other function will raise an Exception if thise modules are
+not available. The <tt class="docutils literal"><span class="pre">pdf</span></tt> backend is used for <tt class="docutils literal"><span class="pre">matplotlib</span></tt> / <tt class="docutils literal"><span class="pre">pylab</span></tt>. 
+This means that plots must be created as PDF files.</p>
+<p>A few functions also utilize <tt class="docutils literal"><span class="pre">scipy</span></tt> for calculations. Before using these
+functions, you should use <em>ScipyAvailable</em> to see if <tt class="docutils literal"><span class="pre">scipy</span></tt> is available.
+Otherwise an exception will be raised.</p>
+<div class="section" id="list-of-functions">
+<h2>List of functions<a class="headerlink" href="#list-of-functions" title="Permalink to this headline">¶</a></h2>
+<p><cite>PylabAvailable</cite></p>
+<p><cite>CumulativeFractionPlot</cite></p>
+<p><cite>Base10Formatter</cite></p>
+<p><cite>SubsetPValue</cite></p>
+<p><cite>SplitLabel</cite></p>
+<p><cite>PlotLinearDensity</cite></p>
+<p><cite>CorrelationPlot</cite></p>
+<p><cite>PlotDistributionComparison</cite></p>
+</div>
+<div class="section" id="details-of-functions">
+<h2>Details of functions<a class="headerlink" href="#details-of-functions" title="Permalink to this headline">¶</a></h2>
+<p>Provided in their individual documentation strings below.</p>
+<dl class="function">
+<dt id="plot.Base10Formatter">
+<tt class="descclassname">plot.</tt><tt class="descname">Base10Formatter</tt><big>(</big><em>number</em>, <em>exp_cutoff</em>, <em>exp_decimal_digits</em>, <em>decimal_digits</em><big>)</big><a class="headerlink" href="#plot.Base10Formatter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts a number into Latex formatting with scientific notation.</p>
+<p>Takes a number and converts it to a string that can be shown
+in LaTex using math mode. It is converted to scientific notation
+if the criteria specified by exp_cutoff.</p>
+<p><em>number</em> the number to be formatted, should be a float or integer.
+Currently only works for numbers &gt;= 0</p>
+<p><em>exp_cutoff</em> convert to scientific notation if abs(math.log10(number)) &gt;= this.</p>
+<p><em>exp_decimal_digits</em> show this many digits after the decimal if number
+is converted to scientific notation.</p>
+<p><em>decimal_digits</em> show this many digits after the decimal if number
+is NOT converted to scientific notation.</p>
+<p>The returned value is the LaTex&#8217; string. If the number is zero, the
+returned string is simply &#8216;0&#8217;.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">Base10Formatter</span><span class="p">(</span><span class="mi">103</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="go">&#39;103.0&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">Base10Formatter</span><span class="p">(</span><span class="mf">103.0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="go">&#39;1.0 \\times 10^{2}&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">Base10Formatter</span><span class="p">(</span><span class="mf">103.0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="go">&#39;1.03 \\times 10^{2}&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">Base10Formatter</span><span class="p">(</span><span class="mf">2892.3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> 
+<span class="go">&#39;2.9 \\times 10^{3}&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">Base10Formatter</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> 
+<span class="go">&#39;0&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">Base10Formatter</span><span class="p">(</span><span class="mf">0.012</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="go">&#39;1.2 \\times 10^{-2}&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">Base10Formatter</span><span class="p">(</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+    <span class="o">...</span>
+<span class="gr">ValueError</span>: <span class="n">number must be &gt;= 0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="plot.CorrelationPlot">
+<tt class="descclassname">plot.</tt><tt class="descname">CorrelationPlot</tt><big>(</big><em>xs</em>, <em>ys</em>, <em>plotfile</em>, <em>xlabel</em>, <em>ylabel</em>, <em>corr=None</em>, <em>title=False</em><big>)</big><a class="headerlink" href="#plot.CorrelationPlot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the correlation between two variables as a scatter plot.</p>
+<p>The data is plotted as a scatter plot.</p>
+<p>This function uses <tt class="docutils literal"><span class="pre">pylab</span></tt> / <tt class="docutils literal"><span class="pre">matplotlib</span></tt>. It will raise an Exception if
+these modules cannot be imported (if <em>PylabAvailable() == False</em>).</p>
+<p>The calling variables use LaTex format for strings. So for
+example, &#8216;$10^5$&#8217; will print the LaTex equivalent of this 
+string. Similarly, certain raw text strings (such as those
+including underscores) will cause problems if you do not
+escape the LaTex format meaning. For instance, &#8216;x_label&#8217;
+will cause a problem since underscore is not valid
+outside of math mode in LaTex, so you would need to use
+&#8216;x_label&#8217; to escape the underscore.</p>
+<p>CALLING VARIABLES:</p>
+<ul class="simple">
+<li><em>xs</em> and <em>ys</em> are lists of numbers, with the lists
+being of the same length. Entry <em>xs[i]</em> is plotted
+on the x-axis agains entrie <em>ys[i]</em> on the y-axis.</li>
+<li><em>plotfile</em> is a string giving the name of the plot PDF file
+that we create. It should end in the extension <tt class="docutils literal"><span class="pre">.pdf</span></tt>.
+If this plot already exists, it is overwritten.</li>
+<li><em>xlabel</em> is a string giving the label placed on the x-axis.</li>
+<li><em>ylabel</em> is a string giving the label placed on the y-axis.</li>
+<li><em>corr</em> specifies if we calculate and include a correlation
+coefficient on the plot. If it is <em>None</em>, then no
+correlation is computed. Otherwise, the coefficient
+is calculated using <tt class="docutils literal"><span class="pre">scipy</span></tt> (so this requires
+<em>ScipyAvailable() == True</em>). In this case, <em>corr</em> should
+be set to the string <em>Pearson</em> (to calculate the 
+Pearson linear correlation coefficient) or to the string
+<em>Spearman</em> (to calculate Spearman&#8217;s rho rank-order correlation).
+In both cases, the correlations are reported along with the
+two-tailed P-values. They are written on the plot.</li>
+<li><em>title</em> is a string giving the title placed above the plot. 
+It can be <em>False</em> if no title is to be used. Otherwise, it should
+be the title string (using LaTex formatting, spaces are allowed).
+Is <em>False</em> by default.</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="plot.CumulativeFractionPlot">
+<tt class="descclassname">plot.</tt><tt class="descname">CumulativeFractionPlot</tt><big>(</big><em>datalist</em>, <em>plotfile</em>, <em>title</em>, <em>xlabel</em><big>)</big><a class="headerlink" href="#plot.CumulativeFractionPlot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a cumulative fraction plot.</p>
+<p>Takes a list of numeric data. Plots a cumulative fraction
+plot giving the fraction of the data points that are &lt;=
+the indicated value.</p>
+<p><em>datalist</em> is a list of numbers giving the data for which we
+are computing the cumulative fraction plot. Raises an 
+exception if this is an empty list.</p>
+<p><em>plotfile</em> is the name of the output plot file created by this method
+(such as &#8216;plot.pdf&#8217;). The extension must be &#8216;.pdf&#8217;.</p>
+<p><em>title</em> is a string placed above the plot as a title. Uses LaTex
+formatting.</p>
+<p><em>xlabel</em> is the label given to the X-axis. Uses LaTex formatting.</p>
+<p>This function uses pylab / matplotlib. It will raise an Exception if
+these modules cannot be imported (if PylabAvailable() is False).</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="plot.PlotDistributionComparison">
+<tt class="descclassname">plot.</tt><tt class="descname">PlotDistributionComparison</tt><big>(</big><em>fullset</em>, <em>subset</em>, <em>fullsetname</em>, <em>subsetname</em>, <em>plotfile</em>, <em>xlabel</em>, <em>ylabel</em>, <em>title</em>, <em>nrandom</em>, <em>withreplacement</em><big>)</big><a class="headerlink" href="#plot.PlotDistributionComparison" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compares two distributions and tests if one has a greater mean.</p>
+<p>This function can be generally used to compare and plot two
+distributions. Specifically, this function creates a plot of the
+distributions of integers in the two distributions <em>fullset</em> and
+<em>subset</em>. For generating this plot, there is no actual requirement
+that <em>subset</em> be a true subset of <em>fullset</em>.</p>
+<p>However, if <em>subset</em> is a true subset of <em>fullset</em>, then this
+function can also calculate and display the P-value
+for the hypothesis that the mean of <em>subset</em> is greater
+than the mean of <em>fullset</em>.</p>
+<p>This function uses <tt class="docutils literal"><span class="pre">pylab</span></tt> / <tt class="docutils literal"><span class="pre">matplotlib</span></tt>. It will raise an Exception if
+these modules cannot be imported (if <em>PylabAvailable() == False</em>).</p>
+<p>The calling variables use LaTex format for strings. So for
+example, &#8216;$10^5$&#8217; will print the LaTex equivalent of this 
+string. Similarly, certain raw text strings (such as those
+including underscores) will cause problems if you do not
+escape the LaTex format meaning. For instance, &#8216;x_label&#8217;
+will cause a problem since underscore is not valid
+outside of math mode in LaTex, so you would need to use
+&#8216;x_label&#8217; to escape the underscore.</p>
+<p>CALLING VARIABLES:</p>
+<ul class="simple">
+<li><em>fullset</em> is a list of integers giving the first data set.</li>
+<li><em>subset</em> is a list of integers giving the second data set.
+If you are using <em>nrandom</em> then <em>subset</em> should be a true
+subset of <em>fullset</em> (for the calculated P-value to make
+sense) and in this case there is a strict requirement that
+<em>len(subset) &lt; len(fullset)</em>.</li>
+<li><em>fullsetname</em> is a string giving the name used to label
+the distribution in <em>fullset</em>.</li>
+<li><em>subsetname</em> is a string giving the name used to label
+the distribution in <em>subset</em>.</li>
+<li><em>plotfile</em> is a string giving the name of the PDF plot file
+generated by this function. It must end in the extension <tt class="docutils literal"><span class="pre">.pdf</span></tt>.
+If this file already exists, it is overwritten.</li>
+<li><em>xlabel</em> is a string giving the label placed on the x-axis.</li>
+<li><em>ylabel</em> is a string giving the label placed on the y-axis.</li>
+<li><em>title</em> is a string that is used to label the plot. If it is set
+to an expression that evaluates to <em>False</em>, then no title is displayed.</li>
+<li><em>nrandom</em> specifies how we calculate the P-value that the mean of 
+<em>subset</em> is &lt; or &gt;= the mean of <em>len(subset)</em> random samples drawn
+from <em>fullset</em>. If <em>nrandom</em> evaluates to <em>False</em>,
+then no P-value is computed or displayed. Otherwise, <em>nrandom</em>
+should give the name of random subsets of <em>fullset</em> that we test
+to compute the P-value. For example, a reasonable number might 
+be <em>nrandom=1e5</em>. Whether the draws are done with or without 
+replacement is specified by <em>withreplacement</em>.</li>
+<li><em>withreplacement</em> specifies how we calculate the P-value. The value
+of <em>withreplacement</em> is arbitrary if <em>nrandom</em> evaluates to <em>False</em>.
+Otherwise, <em>withreplacement</em> must be a <em>bool</em> variable of either <em>True</em>
+or <em>False</em>. If it is <em>True</em>, then the draws of the random subsets are 
+done with replacement (so the same number can be drawn multiple times).
+If it is <em>False</em>, then the draws are done without replacement (so
+the same number is drawn at most once).</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="plot.PlotLinearDensity">
+<tt class="descclassname">plot.</tt><tt class="descname">PlotLinearDensity</tt><big>(</big><em>datalist</em>, <em>plotfile</em>, <em>xlabel</em>, <em>ylabel</em>, <em>title=False</em>, <em>fixymax=False</em><big>)</big><a class="headerlink" href="#plot.PlotLinearDensity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots linear density of variable as a function of primary sequence.</p>
+<p>This function is designed to plot some variable (such as the number
+of epitopes as a function of the primary sequence position). It
+creates an output PDF plot <em>plotfile</em>.</p>
+<p>The data is plotted as lines. If there is more than one
+data series to be plotted, a legend is included.</p>
+<p>This function uses pylab / matplotlib. It will raise an Exception if
+these modules cannot be imported (if <em>PylabAvailable() == False</em>).</p>
+<p>The calling variables use LaTex format for strings. So for
+example, &#8216;$10^5$&#8217; will print the LaTex equivalent of this 
+string. Similarly, certain raw text strings (such as those
+including underscores) will cause problems if you do not
+escape the LaTex format meaning. For instance, &#8216;x_label&#8217;
+will cause a problem since underscore is not valid
+outside of math mode in LaTex, so you would need to use
+&#8216;x_label&#8217; to escape the underscore.</p>
+<p>CALLING VARIABLES:</p>
+<ul class="simple">
+<li><em>datalist</em>  is a list specifying the data to plot. It should
+be a list of one or more 2-tuples of the form 
+<em>(label, data)</em> where <em>label</em> is a string label used in
+the legend, and data is a list of 2-tuples <em>(x, y)</em>
+specifying the points to be plotted.</li>
+<li><em>plotfile</em> is a string giving the name of the plot PDF file
+that we create. It should end in the extension <tt class="docutils literal"><span class="pre">.pdf</span></tt>.
+If this plot already exists, it is overwritten.</li>
+<li><em>xlabel</em> is a string giving the label placed on the x-axis.</li>
+<li><em>ylabel</em> is a string giving the label placed on the y-axis.</li>
+<li><em>title</em> is a string giving the title placed above the plot. 
+It can be <em>False</em> if no title is to be used. Otherwise, it should
+be the title string (using LaTex formatting, spaces are allowed).
+Is <em>False</em> by default.</li>
+<li><em>fixymax</em> means that we fix the y-maximum to the specified value.
+This may be useful if you are making multiple plots for comparisons
+between them, and want them all to have the same y-maximum.
+Note that the value specified here is taken to be the data
+maximum &#8211; the actually maximum of the y-axis is somewhat
+higher to provide some padding space. Is <em>False</em> by default.</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="plot.PylabAvailable">
+<tt class="descclassname">plot.</tt><tt class="descname">PylabAvailable</tt><big>(</big><big>)</big><a class="headerlink" href="#plot.PylabAvailable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if pylab/matplotlib available, False otherwise.</p>
+<p>You should call this function to test for the availability of the
+pylab/matplotlib plotting modules before using other functions in
+this module.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="plot.ScipyAvailable">
+<tt class="descclassname">plot.</tt><tt class="descname">ScipyAvailable</tt><big>(</big><big>)</big><a class="headerlink" href="#plot.ScipyAvailable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns <em>True</em> if scipy is available, <em>False</em> otherwise.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="plot.SplitLabel">
+<tt class="descclassname">plot.</tt><tt class="descname">SplitLabel</tt><big>(</big><em>label</em>, <em>splitlen</em>, <em>splitchar</em><big>)</big><a class="headerlink" href="#plot.SplitLabel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Splits a string with a return if it exceeds a certain length.</p>
+<p><em>label</em> a string giving the label we might split.</p>
+<p><em>splitlen</em> the maximum length of a label before we attempt to 
+split it.</p>
+<p><em>splitchar</em> the character added when splitting a label.</p>
+<p>If len(<em>label</em>) &gt; <em>splitlen</em>, we attempt to split the label in the
+middle by adding <em>splitchar</em>. The label is split as close to the
+middle as possible while splitting at a space.</p>
+<p>No splitting as label length less than <em>splitlen</em></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">SplitLabel</span><span class="p">(</span><span class="s">&#39;WT virus 1&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)</span>
+<span class="go">&#39;WT virus 1&#39;</span>
+</pre></div>
+</div>
+<p>Splitting of this label</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">SplitLabel</span><span class="p">(</span><span class="s">&#39;WT plasmid 1&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)</span>
+<span class="go">&#39;WT\nplasmid 1&#39;</span>
+</pre></div>
+</div>
+<p>Splitting of this label</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">SplitLabel</span><span class="p">(</span><span class="s">&#39;mutated WT plasmid 1&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)</span>
+<span class="go">&#39;mutated WT\nplasmid 1&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="plot.SubsetPValue">
+<tt class="descclassname">plot.</tt><tt class="descname">SubsetPValue</tt><big>(</big><em>subset</em>, <em>fullset</em>, <em>nrandom</em>, <em>withreplacement</em><big>)</big><a class="headerlink" href="#plot.SubsetPValue" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes P-value that mean of <em>subset</em> is &lt; or &gt; than mean of <em>fullset</em>.</p>
+<p><em>subset</em> is a list of numbers.</p>
+<p><em>fullset</em> is a list of numbers with <em>len(fullset) &gt; len(subset)</em></p>
+<p><em>nrandom</em> is the number of random draws to use to compute the P-value.</p>
+<p><em>withreplacement</em> should be <em>True</em> or <em>False</em>. If <em>True</em>, the random
+draws are done with replacement (same value can be drawn multiple
+times). If <em>False</em>, the draws are done without replacement.</p>
+<p>Computes the mean of the numbers in <em>subset</em>. Then performs <em>nrandom</em>
+draws of <em>len(subset)</em> samples (with or without replacement
+depending on the value of <em>withreplacement</em>) of <em>fullset</em>.
+Determines if the mean of the random subsets is &lt; or &gt;= to the mean
+in <em>subset</em>. If it is &lt;, computes the fraction of random subsets
+where the random subsets have a mean &gt;= <em>subset</em>. If it is &gt;=, computes
+the fraction where the random subsets have a mean &lt;= <em>subset</em>. Then returns
+the 2-tuple <em>(gt_or_lt, fraction)</em> where <em>gt_or_lt</em> is either &#8220;&lt;&#8221; (if
+the mean of <em>subset</em> is &gt;= to the random or &#8220;&gt;&#8221;. So <em>fraction</em>
+represents the one-sided P-value for the hypothesis that <em>subset</em>
+has a mean &gt; or &lt; than the value of a random subset from <em>fullset</em>.</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><tt class="docutils literal"><span class="pre">epitopefinder.plot</span></tt> Module</a><ul>
+<li><a class="reference internal" href="#list-of-functions">List of functions</a></li>
+<li><a class="reference internal" href="#details-of-functions">Details of functions</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="align_module.html"
+                        title="previous chapter"><tt class="docutils literal docutils literal"><span class="pre">epitopefinder.align</span></tt> Module</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="acknowledgements.html"
+                        title="next chapter">Acknowledgements</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/plot_module.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="acknowledgements.html" title="Acknowledgements"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="align_module.html" title="epitopefinder.align Module"
+             >previous</a> |</li>
+        <li><a href="index.html">epitopefinder 0.1 documentation</a> &raquo;</li>
+          <li><a href="pythonapi.html" >Python modules</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Jesse D. Bloom.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

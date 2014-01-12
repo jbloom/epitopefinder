@@ -1,9 +1,0 @@
-# input file for epitopefinder_plotdistributioncomparison.py
-plotfile distributioncomparison_human_H3N2_all_vs_epistatic.pdf
-epitopesfile1 epitopesbysite_human_H3N2.csv
-epitopesfile2 epitopecounts_epistaticsites_human_H3N2.csv
-set1name all
-set2name epistatic
-pvalue 100000
-pvaluewithreplacement True
-title human H3N2 influenza NP
