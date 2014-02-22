@@ -7,3 +7,4 @@ set2name substituted
 pvalue 100000
 pvaluewithreplacement False
 title human H3N2 influenza NP
+ymax 0.68

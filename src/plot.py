@@ -127,7 +127,7 @@ def SubsetPValue(subset, fullset, nrandom, withreplacement):
 
 
 def PlotDistributionComparison(fullset, subset, fullsetname, subsetname,\
-        plotfile, xlabel, ylabel, title, nrandom, withreplacement):
+        plotfile, xlabel, ylabel, title, nrandom, withreplacement, ymax=None):
     """Compares two distributions and tests if one has a greater mean.
 
     This function can be generally used to compare and plot two
@@ -196,6 +196,10 @@ def PlotDistributionComparison(fullset, subset, fullsetname, subsetname,\
       done with replacement (so the same number can be drawn multiple times).
       If it is *False*, then the draws are done without replacement (so
       the same number is drawn at most once).
+
+    * *ymax* is an optional argument setting the y-max of the plot. By default
+      it is *None*, meaning that we let ``pylab`` find the best y-maximum.
+      You can also specify a number if you want to set the y-maximum.
     """
     if not _pylabavailable:
         raise ImportError("Could not find pylab or matplotlib")
@@ -234,7 +238,8 @@ def PlotDistributionComparison(fullset, subset, fullsetname, subsetname,\
         y_fullset.append(fullset.count(x) / float(len(fullset)))
         y_subset.append(subset.count(x) / float(len(subset)))
     ymin = 0
-    ymax = max(y_fullset + y_subset)
+    if ymax == None:
+        ymax = max(y_fullset + y_subset)
     pylab.plot(xs, y_fullset, 'bo-', label=fullsetname)
     pylab.plot(xs, y_subset, 'rs--', label=subsetname)
     xrange = xmax - xmin

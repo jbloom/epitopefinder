@@ -151,6 +151,7 @@ def main():
                 'pvalue 100000',
                 'pvaluewithreplacement False',
                 'title %s influenza NP' % sequenceset.replace('_', ' '),
+                'ymax 0.68',
                 ]))
         os.system('%s %s' % (script, infile))
 

@@ -7,3 +7,4 @@ set2name substituted
 pvalue 100000
 pvaluewithreplacement False
 title swine influenza NP
+ymax 0.68

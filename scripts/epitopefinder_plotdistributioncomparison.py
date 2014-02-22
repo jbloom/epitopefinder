@@ -65,8 +65,11 @@ def main():
             raise ValueError("pvalue must be >= 1")
         if len(epitopesbysite2_list) >= len(epitopesbysite1_list):
             raise ValueError("You cannot use pvalue since epitopesbysite2_list is not a subset of epitopesbysite1_list -- it does not contain fewer sites with specified epitope counts.")
+    ymax = None
+    if 'ymax' in d:
+        ymax = epitopefinder.io.ParseFloatValue(d, 'ymax')
     out.write('\nNow creating the plot file %s\n' % plotfile)
-    epitopefinder.plot.PlotDistributionComparison(epitopesbysite1_list, epitopesbysite2_list, set1name, set2name, plotfile, 'number of epitopes', 'fraction of sites', title, pvalue, pvaluewithreplacement)
+    epitopefinder.plot.PlotDistributionComparison(epitopesbysite1_list, epitopesbysite2_list, set1name, set2name, plotfile, 'number of epitopes', 'fraction of sites', title, pvalue, pvaluewithreplacement, ymax=ymax)
     out.write("\nScript is complete.\n")
 
 
