@@ -191,7 +191,7 @@ these modules cannot be imported (if PylabAvailable() is False).</p>
 
 <dl class="function">
 <dt id="plot.PlotDistributionComparison">
-<tt class="descclassname">plot.</tt><tt class="descname">PlotDistributionComparison</tt><big>(</big><em>fullset</em>, <em>subset</em>, <em>fullsetname</em>, <em>subsetname</em>, <em>plotfile</em>, <em>xlabel</em>, <em>ylabel</em>, <em>title</em>, <em>nrandom</em>, <em>withreplacement</em><big>)</big><a class="headerlink" href="#plot.PlotDistributionComparison" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">plot.</tt><tt class="descname">PlotDistributionComparison</tt><big>(</big><em>fullset</em>, <em>subset</em>, <em>fullsetname</em>, <em>subsetname</em>, <em>plotfile</em>, <em>xlabel</em>, <em>ylabel</em>, <em>title</em>, <em>nrandom</em>, <em>withreplacement</em>, <em>ymax=None</em><big>)</big><a class="headerlink" href="#plot.PlotDistributionComparison" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compares two distributions and tests if one has a greater mean.</p>
 <p>This function can be generally used to compare and plot two
 distributions. Specifically, this function creates a plot of the
@@ -246,6 +246,9 @@ or <em>False</em>. If it is <em>True</em>, then the draws of the random subsets 
 done with replacement (so the same number can be drawn multiple times).
 If it is <em>False</em>, then the draws are done without replacement (so
 the same number is drawn at most once).</li>
+<li><em>ymax</em> is an optional argument setting the y-max of the plot. By default
+it is <em>None</em>, meaning that we let <tt class="docutils literal"><span class="pre">pylab</span></tt> find the best y-maximum.
+You can also specify a number if you want to set the y-maximum.</li>
 </ul>
 </dd></dl>
 
