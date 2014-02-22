@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -15,7 +13,7 @@
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
+        URL_ROOT:    './',
         VERSION:     '0.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
@@ -66,10 +64,12 @@
 <div class="section" id="running-the-script">
 <h2>Running the script<a class="headerlink" href="#running-the-script" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference internal" href="#epitopefinder-getepitopes-py"><em>epitopefinder_getepitopes.py</em></a> takes as input the name of a single file, the format of which is detailed below. If you have installed the package so that the scripts are the search path, you can run this script directly from the command line. For example, if you called your input file <tt class="docutils literal"><span class="pre">infile.txt</span></tt> then run:</p>
-<div class="highlight-python"><pre>epitopefinder_getepitopes.py infile.txt</pre>
+<div class="highlight-python"><div class="highlight"><pre>epitopefinder_getepitopes.py infile.txt
+</pre></div>
 </div>
 <p>If the script is not executable on your platform, then run:</p>
-<div class="highlight-python"><pre>python epitopefinder_getepitopes.py infile.txt</pre>
+<div class="highlight-python"><div class="highlight"><pre>python epitopefinder_getepitopes.py infile.txt
+</pre></div>
 </div>
 <p>This will create the various output files described below.</p>
 </div>
@@ -82,11 +82,12 @@
 <li><p class="first"><em>iedbfile</em> is a file containing epitopes in the format of downloads from the <a class="reference external" href="http://www.iedb.org">Immune Epitope Database</a>. It is important that you download only epitopes for which the assay result is positive, otherwise an exception will be raised. These files are downloadable from this database after you do a search for some specific class of epitopes. You will be given an option to download a <em>full</em> or <em>compact</em> file with the epitopes. This script is only confirmed to work with the <em>compact</em> formats. It is possible that it will break if the format of these downloads changes; however, it works with the download format as of April-15-2013. The files themselves are CSV (comma-separated values) files with an initial header line.</p>
 </li>
 <li><p class="first"><em>supertypesfile</em> is a file that gives the supertype classification of HLA-A and HLA-B alleles. The suggested classification scheme is that given in <a class="reference external" href="http://www.biomedcentral.com/1471-2172/9/1">BMC Immunology, 2008, 9(1)</a>, although you may want to update this if the scheme is updated further. A file containing the classification scheme from this reference is contained in some of the example analyses in the <tt class="docutils literal"><span class="pre">examples</span></tt> directories in this package. This file should contains lines that list the alleles at the <tt class="docutils literal"><span class="pre">gene*group:protein</span></tt> level of detail, followed by the supertype, as in:</p>
-<div class="highlight-python"><pre>A*01:01 A01
+<div class="highlight-python"><div class="highlight"><pre>A*01:01 A01
 A*01:02 Unclassified
 A*68:15 A02
 B*07:43 B07
-B*08:01 B08</pre>
+B*08:01 B08
+</pre></div>
 </div>
 </li>
 <li><p class="first"><em>mhcclass</em> specifies the class of MHC epitopes for which we are searching. It can be either I or II depending on whether we searching for class I or class II epitopes.</p>
@@ -94,10 +95,11 @@ B*08:01 B08</pre>
 <li><p class="first"><em>epitopelength</em> specifies the length of epitopes for which we include. It should be a list of two numbers, first the minimum length and then the maximum length. We only retain and consider epitopes with lengths &gt;= the minimum length and &lt;= the maximum length.</p>
 </li>
 <li><p class="first"><em>targetprotsfile</em> specifies a FASTA file containing the target protein sequence(s) to which we are mapping the epitope. It should contain one or more sequences. If there are multiple sequences, they should be aligned. The reason that you might want to include multiple homologous sequences is if the epitopes were defined on a set of closely homologous sequences. For instance, epitopes in influenza might be determined for several closely related sequences, and you might want to find epitopes that closely match any of these sequences. If there is more than one sequence in <em>targetprotsfile</em>, then these sequences should be aligned. The sequence positions for the epitope alignments are then numbered according to consecutive numbering of the first sequence. Here is an example <em>targetprotsfile</em>:</p>
-<div class="highlight-python"><pre>&gt;A/Aichi/2/1968_NP
+<div class="highlight-python"><div class="highlight"><pre>&gt;A/Aichi/2/1968_NP
 MAS-GTKRSYEQMETDGERQNATEIRASVGKMIDGIGRFYIQMCTELKLSDY
 &gt;A/Brisbane/10/2007_NP
-MASQGTKRSYEQMETDGDRQNATEIRASVGKMIDGIGRFYIQMCTELKLSDH</pre>
+MASQGTKRSYEQMETDGDRQNATEIRASVGKMIDGIGRFYIQMCTELKLSDH
+</pre></div>
 </div>
 </li>
 </ul>
@@ -133,7 +135,7 @@ MASQGTKRSYEQMETDGDRQNATEIRASVGKMIDGIGRFYIQMCTELKLSDH</pre>
 <div class="section" id="example-input-file">
 <h2>Example input file<a class="headerlink" href="#example-input-file" title="Permalink to this headline">¶</a></h2>
 <p>Here is an example input file for MHC class I epitopes:</p>
-<div class="highlight-python"><pre># input file for epitopefinder_getepitopes.py
+<div class="highlight-python"><div class="highlight"><pre># input file for epitopefinder_getepitopes.py
 iedbfile Grant2013_plus_IEDB_Influenza_Tcell_compact_2013-04-15.csv
 supertypesfile supertype_classification.txt
 mhcclass I
@@ -144,15 +146,17 @@ musclepath /Users/jbloom/muscle3.8/
 purgeredundant MHCsupertype
 purgeredundantoverlap 8
 epitopelistfile epitopeslist.csv
-epitopesbysitefile epitopesbysite.csv</pre>
+epitopesbysitefile epitopesbysite.csv
+</pre></div>
 </div>
 </div>
 <div class="section" id="output-files">
 <h2>Output files<a class="headerlink" href="#output-files" title="Permalink to this headline">¶</a></h2>
 <p>This script creates the two output CSV files <em>epitopeslistfile</em> and <em>epitopesbysitefile</em>.</p>
 <p><em>epitopeslistfile</em> lists each unique epitope along with its redundant counterparts. Here is an example of the first two lines:</p>
-<div class="highlight-python"><pre>unique_epitope_sequence,unique_epitope_position,unique_epitope_allele,unique_epitope_information,unique_epitope_reference,redundant-1_epitope_sequence,redundant-1_epitope_position,redundant-1_epitope_allele,redundant-1_epitope_information,redundant-1_epitope_reference
-"GERQNATEI","17-25","allele HLA-B*18:01; MHC class I; MHC gene B; MHC supertype B44; MHC group 18","host = Homo sapiens; source = Influenza A virus; molecule = nucleoprotein; reported position = (17, 25); assay = ELISPOT / cytokine release IFNg","Jeff Alexander; Pamuk Bilsel; Marie-France del Guercio; Aleksandra Marinkovic-Petrovic; Scott Southwood; Stephani Stewart; Glenn Ishioka; Maya F Kotturi; Jason Botten; John Sidney; Mark Newman; Alessandro Sette. Hum Immunol. 2010. PMID 20156506",,,,,</pre>
+<div class="highlight-python"><div class="highlight"><pre>unique_epitope_sequence,unique_epitope_position,unique_epitope_allele,unique_epitope_information,unique_epitope_reference,redundant-1_epitope_sequence,redundant-1_epitope_position,redundant-1_epitope_allele,redundant-1_epitope_information,redundant-1_epitope_reference
+&quot;GERQNATEI&quot;,&quot;17-25&quot;,&quot;allele HLA-B*18:01; MHC class I; MHC gene B; MHC supertype B44; MHC group 18&quot;,&quot;host = Homo sapiens; source = Influenza A virus; molecule = nucleoprotein; reported position = (17, 25); assay = ELISPOT / cytokine release IFNg&quot;,&quot;Jeff Alexander; Pamuk Bilsel; Marie-France del Guercio; Aleksandra Marinkovic-Petrovic; Scott Southwood; Stephani Stewart; Glenn Ishioka; Maya F Kotturi; Jason Botten; John Sidney; Mark Newman; Alessandro Sette. Hum Immunol. 2010. PMID 20156506&quot;,,,,,
+</pre></div>
 </div>
 <p><em>epitopesbysitefile</em> lists all of the sites as they are numbered in sequential 1, 2, ... numbering of the aligned target proteins in <em>targetprotsfile</em>, followed by the number of unique epitopes containing that site. Here is an example of the first few lines:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">Site</span><span class="p">,</span><span class="n">NumberUniqueEpitopes</span>
@@ -247,7 +251,7 @@ epitopesbysitefile epitopesbysite.csv</pre>
     </div>
     <div class="footer">
         &copy; Copyright 2013, Jesse D. Bloom.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.1.
     </div>
   </body>
 </html>

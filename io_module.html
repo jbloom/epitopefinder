@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -15,7 +13,7 @@
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
+        URL_ROOT:    './',
         VERSION:     '0.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
@@ -56,8 +54,8 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="module-io">
-<span id="epitopefinder-io-module"></span><h1><tt class="docutils literal"><span class="pre">epitopefinder.io</span></tt> Module<a class="headerlink" href="#module-io" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="module-src.io">
+<span id="epitopefinder-io-module"></span><h1><tt class="docutils literal"><span class="pre">epitopefinder.io</span></tt> Module<a class="headerlink" href="#module-src.io" title="Permalink to this headline">¶</a></h1>
 <p>Module for performing input/output operations.</p>
 <p>Functions are:</p>
 <p><em>ParseInfile</em> : reads key / value pairs from an input file.</p>
@@ -69,8 +67,8 @@
 <p><em>ParseFileList</em> : reads file list specified by input dictionary.</p>
 <p>Written by Jesse Bloom.</p>
 <dl class="function">
-<dt id="io.ParseBoolValue">
-<tt class="descclassname">io.</tt><tt class="descname">ParseBoolValue</tt><big>(</big><em>d</em>, <em>key</em><big>)</big><a class="headerlink" href="#io.ParseBoolValue" title="Permalink to this definition">¶</a></dt>
+<dt id="src.io.ParseBoolValue">
+<tt class="descclassname">src.io.</tt><tt class="descname">ParseBoolValue</tt><big>(</big><em>d</em>, <em>key</em><big>)</big><a class="headerlink" href="#src.io.ParseBoolValue" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets Boolean argument from input dictionary.</p>
 <p><em>d</em> is a dictionary of key/value string pairs as returned by
 <strong>ParseInfile</strong>.</p>
@@ -103,8 +101,8 @@ something other than <em>True</em> or <em>False</em>.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="io.ParseFileList">
-<tt class="descclassname">io.</tt><tt class="descname">ParseFileList</tt><big>(</big><em>d</em>, <em>key</em><big>)</big><a class="headerlink" href="#io.ParseFileList" title="Permalink to this definition">¶</a></dt>
+<dt id="src.io.ParseFileList">
+<tt class="descclassname">src.io.</tt><tt class="descname">ParseFileList</tt><big>(</big><em>d</em>, <em>key</em><big>)</big><a class="headerlink" href="#src.io.ParseFileList" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets list of files from input dictionary.</p>
 <p><em>d</em> is a dictionary of key/value string pairs as returned by
 <strong>ParseInfile</strong>.</p>
@@ -116,8 +114,8 @@ exist in <em>d</em>, raises and KeyError.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="io.ParseFloatValue">
-<tt class="descclassname">io.</tt><tt class="descname">ParseFloatValue</tt><big>(</big><em>d</em>, <em>key</em><big>)</big><a class="headerlink" href="#io.ParseFloatValue" title="Permalink to this definition">¶</a></dt>
+<dt id="src.io.ParseFloatValue">
+<tt class="descclassname">src.io.</tt><tt class="descname">ParseFloatValue</tt><big>(</big><em>d</em>, <em>key</em><big>)</big><a class="headerlink" href="#src.io.ParseFloatValue" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets float argument from input dictionary.</p>
 <p><em>d</em> a dictionary of key/value string pairs as returned by
 <strong>ParseInfile</strong>.</p>
@@ -150,8 +148,8 @@ something other than an integer.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="io.ParseInfile">
-<tt class="descclassname">io.</tt><tt class="descname">ParseInfile</tt><big>(</big><em>f</em><big>)</big><a class="headerlink" href="#io.ParseInfile" title="Permalink to this definition">¶</a></dt>
+<dt id="src.io.ParseInfile">
+<tt class="descclassname">src.io.</tt><tt class="descname">ParseInfile</tt><big>(</big><em>f</em><big>)</big><a class="headerlink" href="#src.io.ParseInfile" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reads key / value pairs from an input file.</p>
 <p><em>f</em> should be a readable file-like object.</p>
 <p>Starting at the current position in <em>f</em>, reads all remaining lines
@@ -190,8 +188,8 @@ duplicate key, and exception is raised.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="io.ParseIntValue">
-<tt class="descclassname">io.</tt><tt class="descname">ParseIntValue</tt><big>(</big><em>d</em>, <em>key</em><big>)</big><a class="headerlink" href="#io.ParseIntValue" title="Permalink to this definition">¶</a></dt>
+<dt id="src.io.ParseIntValue">
+<tt class="descclassname">src.io.</tt><tt class="descname">ParseIntValue</tt><big>(</big><em>d</em>, <em>key</em><big>)</big><a class="headerlink" href="#src.io.ParseIntValue" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets integer argument from input dictionary.</p>
 <p><em>d</em> is a dictionary of key/value string pairs as returned by
 <strong>ParseInfile</strong>.</p>
@@ -220,8 +218,8 @@ something other than an integer.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="io.ParseSeqValue">
-<tt class="descclassname">io.</tt><tt class="descname">ParseSeqValue</tt><big>(</big><em>d</em>, <em>key</em><big>)</big><a class="headerlink" href="#io.ParseSeqValue" title="Permalink to this definition">¶</a></dt>
+<dt id="src.io.ParseSeqValue">
+<tt class="descclassname">src.io.</tt><tt class="descname">ParseSeqValue</tt><big>(</big><em>d</em>, <em>key</em><big>)</big><a class="headerlink" href="#src.io.ParseSeqValue" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reads sequence from FASTA file specified by input dictionary.</p>
 <p><em>d</em> is a dictionary of key/value string pairs as returned by
 <strong>ParseInfile</strong>.</p>
@@ -234,8 +232,8 @@ does not specify exactly one sequence.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="io.ParseStringValue">
-<tt class="descclassname">io.</tt><tt class="descname">ParseStringValue</tt><big>(</big><em>d</em>, <em>key</em><big>)</big><a class="headerlink" href="#io.ParseStringValue" title="Permalink to this definition">¶</a></dt>
+<dt id="src.io.ParseStringValue">
+<tt class="descclassname">src.io.</tt><tt class="descname">ParseStringValue</tt><big>(</big><em>d</em>, <em>key</em><big>)</big><a class="headerlink" href="#src.io.ParseStringValue" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reads string argument specified by input dictionary.</p>
 <p><em>d</em> is a dictionary of the key/value string pairs as returned by
 <strong>ParseInfile</strong>.</p>
@@ -270,10 +268,10 @@ the <em>key</em> does not exist in <em>d</em>.</p>
         <div class="sphinxsidebarwrapper">
   <h4>Previous topic</h4>
   <p class="topless"><a href="epitopes_module.html"
-                        title="previous chapter"><tt class="docutils literal docutils literal"><span class="pre">epitopefinder.epitopes</span></tt> Module</a></p>
+                        title="previous chapter"><tt class="docutils literal"><span class="pre">epitopefinder.epitopes</span></tt> Module</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="sequtils_module.html"
-                        title="next chapter"><tt class="docutils literal docutils literal"><span class="pre">epitope_mapper.sequtils</span></tt> Module</a></p>
+                        title="next chapter"><tt class="docutils literal"><span class="pre">epitope_mapper.sequtils</span></tt> Module</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="_sources/io_module.txt"
@@ -317,7 +315,7 @@ the <em>key</em> does not exist in <em>d</em>.</p>
     </div>
     <div class="footer">
         &copy; Copyright 2013, Jesse D. Bloom.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.1.
     </div>
   </body>
 </html>

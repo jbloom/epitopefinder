@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -15,7 +13,7 @@
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
+        URL_ROOT:    './',
         VERSION:     '0.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
@@ -243,7 +241,8 @@ file into memory at once.</p>
 the FASTA file.  The &#8220;name&#8221; of a sequence is the string immediately following
 the &#8220;&gt;&#8221; in the FASTA file header for a sequence, terminated by a space character
 (space, tab, or return).  So for example, the header:</p>
-<div class="highlight-python"><pre>&gt;E_coli_thioredoxin: the thioredoxin protein from E. coli</pre>
+<div class="highlight-python"><div class="highlight"><pre>&gt;E_coli_thioredoxin: the thioredoxin protein from E. coli
+</pre></div>
 </div>
 <p>would correspond to a name of &#8220;E_coli_thioredoxin&#8221;.  &#8216;namelist&#8217; specifies
 a list of these names.</p>
@@ -288,11 +287,12 @@ then return all strains with full genomes.</p>
 <ul>
 <li><p class="first"><em>infile</em> is a string giving the name of the FASTA file. The
 headers should be of the following format:</p>
-<div class="highlight-python"><pre>&gt;AAX11456 A/New York/61A/2003(H3N2) 2003/12/20 M1
+<div class="highlight-python"><div class="highlight"><pre>&gt;AAX11456 A/New York/61A/2003(H3N2) 2003/12/20 M1
 
 &gt;AAB06984 A/Louisiana/4/93(H3N2) 1993// NA
 
-&gt;CAD29965 A/Panama/2007/1999 1999// NA</pre>
+&gt;CAD29965 A/Panama/2007/1999 1999// NA
+</pre></div>
 </div>
 <p>These headers given the sequence number, the strain name (it
 is optional whether the subtype, see the third example header),
@@ -534,10 +534,10 @@ length.</p>
         <div class="sphinxsidebarwrapper">
   <h4>Previous topic</h4>
   <p class="topless"><a href="io_module.html"
-                        title="previous chapter"><tt class="docutils literal docutils literal docutils literal"><span class="pre">epitopefinder.io</span></tt> Module</a></p>
+                        title="previous chapter"><tt class="docutils literal"><span class="pre">epitopefinder.io</span></tt> Module</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="align_module.html"
-                        title="next chapter"><tt class="docutils literal docutils literal docutils literal"><span class="pre">epitopefinder.align</span></tt> Module</a></p>
+                        title="next chapter"><tt class="docutils literal"><span class="pre">epitopefinder.align</span></tt> Module</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="_sources/sequtils_module.txt"
@@ -581,7 +581,7 @@ length.</p>
     </div>
     <div class="footer">
         &copy; Copyright 2013, Jesse D. Bloom.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.1.
     </div>
   </body>
 </html>

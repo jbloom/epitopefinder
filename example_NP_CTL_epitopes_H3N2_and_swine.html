@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -15,7 +13,7 @@
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
+        URL_ROOT:    './',
         VERSION:     '0.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
@@ -93,7 +91,8 @@
 <div class="section" id="running-the-analysis">
 <h2>Running the analysis<a class="headerlink" href="#running-the-analysis" title="Permalink to this headline">¶</a></h2>
 <p>The entire analysis can be run with the master <tt class="docutils literal"><span class="pre">run_analysis.py</span></tt> script. Simply run:</p>
-<div class="highlight-python"><pre>python run_analysis.py</pre>
+<div class="highlight-python"><div class="highlight"><pre>python run_analysis.py
+</pre></div>
 </div>
 <p>This master script creates output <tt class="docutils literal"><span class="pre">*.csv</span></tt> files listing the epitope counts, and also creates plots summarizing the key results. All of the plots are created in <tt class="docutils literal"><span class="pre">*.pdf</span></tt>, <tt class="docutils literal"><span class="pre">*.jpg</span></tt>, and <tt class="docutils literal"><span class="pre">*.eps</span></tt> formats.</p>
 <p>Note that the path to the <a class="reference external" href="http://www.drive5.com/muscle/">MUSCLE</a> executable <strong>is hardcoded</strong> in the <tt class="docutils literal"><span class="pre">run_analysis.py</span></tt> script. So if you want to run the script on your computer, you will need to manually edit <tt class="docutils literal"><span class="pre">run_analysis.py</span></tt> to specify the appropriate path to <a class="reference external" href="http://www.drive5.com/muscle/">MUSCLE</a>.</p>
@@ -107,8 +106,9 @@
 <p>This is done by searching for all epitopes between length 8 and 12 residues from non-redundant MHC class I alleles that align with no more than one mismatch to one of the sequences specified in <em>targetprots_humanH3N2.fasta</em> (for human H3N2) or <em>targetprots_swine.fasta</em> (for swine).</p>
 <p>The alleles are classified at the level of the allele group (as defined by <a class="reference external" href="http://hla.alleles.org/nomenclature/naming.html">HLA nomenclature</a>), so for example <cite>HLA-B*35:01</cite> has a gene of <cite>HLA-B</cite> and group of <cite>35</cite>, and would be non-redundant with <cite>HLA-B*27:01</cite> but redundant with <cite>HLA-B*35:03</cite>.</p>
 <p>The identification of epitopes was done using the <a class="reference external" href="https://github.com/jbloom/epitopefinder">epitopefinder</a> package with the following commands:</p>
-<div class="highlight-python"><pre>epitopefinder_getepitopes.py epitopefinder_getepitopes_human_H3N2_infile.txt
-epitopefinder_getepitopes.py epitopefinder_getepitopes_swine_infile.txt</pre>
+<div class="highlight-python"><div class="highlight"><pre>epitopefinder_getepitopes.py epitopefinder_getepitopes_human_H3N2_infile.txt
+epitopefinder_getepitopes.py epitopefinder_getepitopes_swine_infile.txt
+</pre></div>
 </div>
 <p>where the input files are created automatically by the <tt class="docutils literal"><span class="pre">run_analysis.py</span></tt> script.</p>
 <p>The identified epitopes are found in the following created files:</p>
@@ -133,18 +133,19 @@ epitopefinder_getepitopes.py epitopefinder_getepitopes_swine_infile.txt</pre>
 </ul>
 </div></blockquote>
 <p>Plots are then created showing the number of epitopes per site for the swine and human H3N2 NPs. The plots are created using <a class="reference external" href="https://github.com/jbloom/epitopefinder">epitopefinder</a> with the commands:</p>
-<div class="highlight-python"><pre>epitopefinder_plotdistributioncomparison.py epitopefinder_plotdistributioncomparison_human_H3N2_vs_swine_infile.txt
-epitopefinder_plotlineardensity epitopefinder_plotlineardensity_infile.txt</pre>
+<div class="highlight-python"><div class="highlight"><pre>epitopefinder_plotdistributioncomparison.py epitopefinder_plotdistributioncomparison_human_H3N2_vs_swine_infile.txt
+epitopefinder_plotlineardensity epitopefinder_plotlineardensity_infile.txt
+</pre></div>
 </div>
 <p>where the input files are created automatically by the <tt class="docutils literal"><span class="pre">run_analysis.py</span></tt> script.</p>
 <p>These plots show that the number and distribution of epitopes among the sites are highly similar for human H3N2 and swine NPs.</p>
 <blockquote>
 <div><div class="figure align-center">
-<img alt="epitopelineardensity.jpg" src="_images/epitopelineardensity1.jpg" style="width: 80%;" />
+<a class="reference internal image-reference" href="_images/epitopelineardensity1.jpg"><img alt="epitopelineardensity.jpg" src="_images/epitopelineardensity1.jpg" style="width: 80%;" /></a>
 <p class="caption">Above is the <tt class="docutils literal"><span class="pre">epitopelineardensity.*</span></tt> plot.</p>
 </div>
 <div class="figure align-center">
-<img alt="distributioncomparison_human_H3N2_vs_swine.jpg" src="_images/distributioncomparison_human_H3N2_vs_swine.jpg" style="width: 50%;" />
+<a class="reference internal image-reference" href="_images/distributioncomparison_human_H3N2_vs_swine.jpg"><img alt="distributioncomparison_human_H3N2_vs_swine.jpg" src="_images/distributioncomparison_human_H3N2_vs_swine.jpg" style="width: 50%;" /></a>
 <p class="caption">Above is the <tt class="docutils literal"><span class="pre">distributioncomparison_human_H3N2_vs_swine.*</span></tt> plot.</p>
 </div>
 </div></blockquote>
@@ -154,8 +155,9 @@ epitopefinder_plotlineardensity epitopefinder_plotlineardensity_infile.txt</pre>
 <h3>Analyze epitopes among sites that substitute<a class="headerlink" href="#analyze-epitopes-among-sites-that-substitute" title="Permalink to this headline">¶</a></h3>
 <p>The next step is to extract information about the number of epitopes per site for the sites of all substitutions along the evolutionary trajectory of interest. Recall that the evolutionary trajectories for the human H3N2 and swine NPs are found at <a class="reference external" href="http://jbloom.github.io/mutpath/example_influenza_NP_1918_Descended.html#human-h3n2-mutational-trajectory">http://jbloom.github.io/mutpath/example_influenza_NP_1918_Descended.html#human-h3n2-mutational-trajectory</a> and <a class="reference external" href="http://jbloom.github.io/mutpath/example_influenza_NP_1918_Descended.html#swine-influenza-mutational-trajectory">http://jbloom.github.io/mutpath/example_influenza_NP_1918_Descended.html#swine-influenza-mutational-trajectory</a>.</p>
 <p>The identification of the epitopes among the sites that substitute is done using the <a class="reference external" href="https://github.com/jbloom/epitopefinder">epitopefinder</a> package with the following commands:</p>
-<div class="highlight-python"><pre>epitopefinder_selectsites.py selectsites_infile_human_H3N2.txt
-epitopefinder_selectsites.py selectsites_infile_swine.txt</pre>
+<div class="highlight-python"><div class="highlight"><pre>epitopefinder_selectsites.py selectsites_infile_human_H3N2.txt
+epitopefinder_selectsites.py selectsites_infile_swine.txt
+</pre></div>
 </div>
 <p>where the input files are created automatically by the <tt class="docutils literal"><span class="pre">run_analysis.py</span></tt> script.</p>
 <p>The number of epitopes per site for the selected sites are listed in the following created files:</p>
@@ -166,18 +168,19 @@ epitopefinder_selectsites.py selectsites_infile_swine.txt</pre>
 </ul>
 </div></blockquote>
 <p>Plots are then created comparing the number of epitopes per site among all sites versus the subset of sites that substituted along the evolutionar trajectories. The plots are created using <a class="reference external" href="https://github.com/jbloom/epitopefinder">epitopefinder</a> with the commands:</p>
-<div class="highlight-python"><pre>epitopefinder_plotdistributioncomparison.py epitopefinder_plotdistributioncomparison_human_H3N2_all_vs_substituted_infile.txt
-epitopefinder_plotdistributioncomparison.py epitopefinder_plotdistributioncomparison_swine_all_vs_substituted_infile.txt</pre>
+<div class="highlight-python"><div class="highlight"><pre>epitopefinder_plotdistributioncomparison.py epitopefinder_plotdistributioncomparison_human_H3N2_all_vs_substituted_infile.txt
+epitopefinder_plotdistributioncomparison.py epitopefinder_plotdistributioncomparison_swine_all_vs_substituted_infile.txt
+</pre></div>
 </div>
 <p>where the input files are created automatically by the <tt class="docutils literal"><span class="pre">run_analysis.py</span></tt> script.</p>
 <p>The P-values shown on the plots are one-sided P-values giving the probability that by random chance, the subset would have a difference from all sites as great as that observed. These plots indicate that the sites that substitute in swine NP have significantly fewer epitopes than the average site, while for human H3N2 the sites that substitute are bordering on significantly having more epitopes than all sites. One possible interpretation: on average human CTLs target sites that are relatively intolerant to mutation, so in the absence of selection (swine NP) the typical substituted site is depleted in epitopes. But in human H3N2 NP, pressure for CTL escape causes sites that substitute to have an excess of epitopes.</p>
 <blockquote>
 <div><div class="figure align-center">
-<img alt="distributioncomparison_human_H3N2_all_vs_substituted.jpg" src="_images/distributioncomparison_human_H3N2_all_vs_substituted.jpg" style="width: 50%;" />
+<a class="reference internal image-reference" href="_images/distributioncomparison_human_H3N2_all_vs_substituted.jpg"><img alt="distributioncomparison_human_H3N2_all_vs_substituted.jpg" src="_images/distributioncomparison_human_H3N2_all_vs_substituted.jpg" style="width: 50%;" /></a>
 <p class="caption">Above is the <tt class="docutils literal"><span class="pre">distributioncomparison_human_H3N2_all_vs_substituted.*</span></tt> plot.</p>
 </div>
 <div class="figure align-center">
-<img alt="distributioncomparison_swine_all_vs_substituted.jpg" src="_images/distributioncomparison_swine_all_vs_substituted.jpg" style="width: 50%;" />
+<a class="reference internal image-reference" href="_images/distributioncomparison_swine_all_vs_substituted.jpg"><img alt="distributioncomparison_swine_all_vs_substituted.jpg" src="_images/distributioncomparison_swine_all_vs_substituted.jpg" style="width: 50%;" /></a>
 <p class="caption">Above is the <tt class="docutils literal"><span class="pre">distributioncomparison_swine_all_vs_substituted.*</span></tt> plot.</p>
 </div>
 </div></blockquote>
@@ -187,8 +190,9 @@ epitopefinder_plotdistributioncomparison.py epitopefinder_plotdistributioncompar
 <h3>Analyze epitopes among &#8220;epistatic&#8221; sites<a class="headerlink" href="#analyze-epitopes-among-epistatic-sites" title="Permalink to this headline">¶</a></h3>
 <p>The next step is to examine epitopes among the &#8220;epistatic&#8221; sites. These are the three sites of substitutions in human H3N2 (residues 259, 280, and 384) that were identified in <a class="reference external" href="http://elife.elifesciences.org/content/2/e00631">Gong et al, 2013</a> as being individually deleterious in the background of the A/Aichi/2/1968 human H3N2 NP. Note that there are no such &#8220;epistatic&#8221; sites along the swine trajectory of interest, so no analysis can be performed of epistatic sites in swine NP.</p>
 <p>The identification of the epitopes among the epistatic sites is done using the <a class="reference external" href="https://github.com/jbloom/epitopefinder">epitopefinder</a> package with the following commands:</p>
-<div class="highlight-python"><pre>epitopefinder_selectsites.py epitopefinder_selectsites_human_H3N2_epistaticsites.txt
-epitopefinder_selectsites.py selectsites_infile_swine.txt</pre>
+<div class="highlight-python"><div class="highlight"><pre>epitopefinder_selectsites.py epitopefinder_selectsites_human_H3N2_epistaticsites.txt
+epitopefinder_selectsites.py selectsites_infile_swine.txt
+</pre></div>
 </div>
 <p>where the input file is created automatically by the <tt class="docutils literal"><span class="pre">run_analysis.py</span></tt> script.</p>
 <p>The number of epitopes per site for the epistatics sites is listed in the following created file:</p>
@@ -198,18 +202,19 @@ epitopefinder_selectsites.py selectsites_infile_swine.txt</pre>
 </ul>
 </div></blockquote>
 <p>Plots are then created comparing the number of epitopes per site among the epistatic sites with the numbers among all sites and substituted sites. The plots are created using <a class="reference external" href="https://github.com/jbloom/epitopefinder">epitopefinder</a> with the commands:</p>
-<div class="highlight-python"><pre>epitopefinder_plotdistributioncomparison.py epitopefinder_plotdistributioncomparison_human_H3N2_all_vs_epistatic_infile.txt
-epitopefinder_plotdistributioncomparison.py epitopefinder_plotdistributioncomparison_human_H3N2_substituted_vs_epistatic_infile.txt</pre>
+<div class="highlight-python"><div class="highlight"><pre>epitopefinder_plotdistributioncomparison.py epitopefinder_plotdistributioncomparison_human_H3N2_all_vs_epistatic_infile.txt
+epitopefinder_plotdistributioncomparison.py epitopefinder_plotdistributioncomparison_human_H3N2_substituted_vs_epistatic_infile.txt
+</pre></div>
 </div>
 <p>where the input files are created automatically by the <tt class="docutils literal"><span class="pre">run_analysis.py</span></tt> script.</p>
 <p>The P-values shown on the plots are one-sided P-values giving the probability that by random chance, the epistatic subset would have a difference from all sites or the substituted as great as that observed. These plots indicate that the epistatic sites are significantly enriched in epitopes relative to all sites and substituted sites in human H3N2.</p>
 <blockquote>
 <div><div class="figure align-center">
-<img alt="distributioncomparison_human_H3N2_all_vs_epistatic.jpg" src="_images/distributioncomparison_human_H3N2_all_vs_epistatic.jpg" style="width: 50%;" />
+<a class="reference internal image-reference" href="_images/distributioncomparison_human_H3N2_all_vs_epistatic.jpg"><img alt="distributioncomparison_human_H3N2_all_vs_epistatic.jpg" src="_images/distributioncomparison_human_H3N2_all_vs_epistatic.jpg" style="width: 50%;" /></a>
 <p class="caption">Above is the <tt class="docutils literal"><span class="pre">distributioncomparison_human_H3N2_all_vs_epistatic.*</span></tt> plot.</p>
 </div>
 <div class="figure align-center">
-<img alt="distributioncomparison_human_H3N2_all_vs_substituted.jpg" src="_images/distributioncomparison_human_H3N2_substituted_vs_epistatic.jpg" style="width: 50%;" />
+<a class="reference internal image-reference" href="_images/distributioncomparison_human_H3N2_substituted_vs_epistatic.jpg"><img alt="distributioncomparison_human_H3N2_all_vs_substituted.jpg" src="_images/distributioncomparison_human_H3N2_substituted_vs_epistatic.jpg" style="width: 50%;" /></a>
 <p class="caption">Above is the <tt class="docutils literal"><span class="pre">distributioncomparison_human_H3N2_substituted_vs_epistatic.*</span></tt> plot.</p>
 </div>
 </div></blockquote>
@@ -288,7 +293,7 @@ epitopefinder_plotdistributioncomparison.py epitopefinder_plotdistributioncompar
     </div>
     <div class="footer">
         &copy; Copyright 2013, Jesse D. Bloom.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.1.
     </div>
   </body>
 </html>
