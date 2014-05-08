@@ -4,7 +4,9 @@ Acknowledgements
 
 Citations
 ----------
-If you use `epitopefinder`_, please cite an appropriate reference from `Jesse Bloom`_'s webpage.
+If you use `epitopefinder`_, please cite the following reference:
+
+* `Gong and Bloom, PLoS Genetics, 2014`_
 
 License
 ---------

@@ -3,6 +3,8 @@
 CTL epitopes in influenza NP: human H3N2 and swine
 ============================================================
 
+This is the analysis described in `Gong and Bloom, PLoS Genetics, 2014`_.
+
 This is an analysis of human CTL epitopes in the nucleoprotein (NP) of human H3N2 (1968 to 2013) and the swine NPs descended from the 1918 virus. It finds MHC class I epitopes with experimentally verified CTL responses as mined from the `Immune Epitope Database`_. The analysis examines the association between epitopes and sites that have substituted during the natural evolution, and sites that have been experimentally identified as being involved in epistatic interactions.
 
 This analysis utilizes the `epitopefinder`_ package. The data and scripts can be found in the subdirectory ``./examples/NP_CTL_epitopes_H3N2_and_swine`` in the `epitopefinder`_ package.
@@ -219,3 +221,5 @@ The P-values shown on the plots are one-sided P-values giving the probability th
 .. _`HLA nomenclature`: http://hla.alleles.org/nomenclature/naming.html
 .. _`Kolmogorov-Smirnov test`: http://en.wikipedia.org/wiki/Kolmogorov%E2%80%93Smirnov_test
 .. _`scipy`: http://www.scipy.org/
+.. _`Gong and Bloom, PLoS Genetics, 2014`: http://www.plosgenetics.org/article/info%3Adoi%2F10.1371%2Fjournal.pgen.1004328
+.. _`epitopefinder version 0.1`: https://github.com/jbloom/epitopefinder/tree/v0.1

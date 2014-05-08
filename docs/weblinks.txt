@@ -11,3 +11,4 @@
 .. _`Python`: http://www.python.org/
 .. _`GPLv3`: http://www.gnu.org/licenses/gpl.html
 .. _`HLA nomenclature`: http://hla.alleles.org/nomenclature/naming.html
+.. _`Gong and Bloom, PLoS Genetics, 2014`: http://www.plosgenetics.org/article/info%3Adoi%2F10.1371%2Fjournal.pgen.1004328
