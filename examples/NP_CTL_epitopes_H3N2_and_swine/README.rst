@@ -15,7 +15,7 @@ Software used
 --------------
 This analysis was performed on Mac OS X (10.6.8) using the following software packages:
 
-* `epitopefinder`_ (version 0.1) is the primary software package used.
+* `epitopefinder`_ (`epitopefinder version 0.1`_) is the primary software package used.
 
 * `Python`_ (version 2.6.8) is used to run `epitopefinder`_.
 
