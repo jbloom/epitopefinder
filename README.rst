@@ -4,7 +4,7 @@
 
 `epitopefinder`_ documentation is available `on GitHub Pages`_.
 
-This package was written by `Jesse Bloom`_.
+This package was written by `Jesse Bloom`_ and Heather Machkovech.
 
 `epitopefinder`_ is free software under a `GPLv3`_ license.
 
