@@ -182,9 +182,9 @@ def Align(headers_seqs, progpath, program='MUSCLE'):
         if len(alignedseq) != n:
             open('errors.temp', 'w').write(errors)
             raise ValueError, "Aligned sequence %s is not of length %d: if you are using MUSCLE, you may be running out of memory.  Errors have been written to errors.temp." % (alignedseq, n)
-        if len(seq) - seq.count('-') > n:
-            open('errors.temp', 'w').write(errors)
-            raise ValueError, "Unaligned seq %s is longer than aligned length of %d: if you are using MUSCLE, you many be running out of memory.  Errors have been written to errors.temp." % (seq, n)
+#        if len(seq) - seq.count('-') > n:
+#            open('errors.temp', 'w').write(errors)
+#            raise ValueError, "Unaligned seq %s is longer than aligned length of %d: if you are using MUSCLE, you many be running out of memory.  Errors have been written to errors.temp." % (seq, n)
         aligned_headers_seqs.append((head, alignedseq))
     return aligned_headers_seqs # return the aligned sequences
 
