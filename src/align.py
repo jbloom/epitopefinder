@@ -84,7 +84,7 @@ def GetEpitopeAlignments(epitope, targetseqs, maxmismatches, musclepath):
                     alignend = i
                     break
         else:
-            alignend = i
+            alignend = i + 1
         assert len(epitope) == alignend - alignstart, "Here is alignment:\n>%s\n%s\n>%s\n%s\nlen(epitope) = %d, alignend = %d, alignstart = %d" % (a[0][0], a[0][1], a[1][0], a[1][1], len(epitope), alignend, alignstart)
         extractedmatch = seq[alignstart : alignend].replace('-', '')
         assert len(extractedmatch) == len(epitope)
