@@ -10,6 +10,7 @@ import tempfile
 import sys
 import subprocess
 import sequtils
+import re
 
 
 def GetEpitopeAlignments(epitope, targetseqs, maxmismatches, musclepath):
@@ -83,11 +84,22 @@ def GetEpitopeAlignments(epitope, targetseqs, maxmismatches, musclepath):
                 if (alignedepitope[ialignment] == '-') and alignstart != -1:
                     alignend = i
                     break
-        else:
-            alignend = min(i + 1, len(seq))
-        assert len(epitope) == alignend - alignstart, "Here is alignment:\n>%s\n%s\n>%s\n%s\nlen(epitope) = %d, alignend = %d, alignstart = %d" % (a[0][0], a[0][1], a[1][0], a[1][1], len(epitope), alignend, alignstart)
+                if ialignment + 1 == len(alignedseq): # if epitope aligns to end of alignedseq (with or without additional gaps after epitope in seq)
+                    alignend = i + 1
+                    break
+                if seq[i] == '-' and alignstart != -1 and alignedepitope[ialignment +1] == '-': #if epitope ends right before a gap 
+                    alignend = i
+                    break
+        
+        count = 0
+        if '-' in seq[alignstart:alignend]:  # this adjusts len epitope if epitope aligns over gap in seq
+            for i in range(len(seq[alignstart:alignend])):
+                if seq[alignstart+i] == '-':
+                    count +=1
+
+        assert len(epitope)+ count == alignend - alignstart, "Here is alignment:\n>%s\n%s\n>%s\n%s\nlen(epitope) = %d, alignend = %d, alignstart = %d, n = %d, len(seq) = %d, seq = %s" % (a[0][0], a[0][1], a[1][0], a[1][1], len(epitope), alignend, alignstart, n, len(seq), seq)
         extractedmatch = seq[alignstart : alignend].replace('-', '')
-        assert len(extractedmatch) == len(epitope)
+        assert len(extractedmatch) == len(epitope), "Here is alignment:\n>%s\n%s\n>%s\n%s\nlen(epitope) = %d, alignend = %d, alignstart = %d, n = %d, len(seq) = %d, seq = %s" % (a[0][0], a[0][1], a[1][0], a[1][1], len(epitope), alignend, alignstart, n, len(seq), seq)
         diffs = len([j for j in range(len(epitope)) if epitope[j] != extractedmatch[j]])
         assert diffs <= maxmismatches
         matchlist.append((alignstart + 1, alignend, head))
